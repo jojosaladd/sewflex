@@ -1,0 +1,15 @@
+{
+  "backendError": "Backend gaf een foutmelding",
+  "contactingBackend": "Contact maken met de backend van FreeSewing",
+  "contactingGitHub": "Contact opnemen met GitHub",
+  "contactingGoogle": "Contact opnemen met Google",
+  "copiedToClipboard": "Gekopieerd naar het klembord",
+  "dataLoaded": "Geladen gegevens van het FreeSewing backend",
+  "generatingPdf": "PDF genereren, een ogenblik geduld alstublieft",
+  "nailedIt": "Dat is ook weer geregeld!",
+  "pdfFailed": "Er is een onverwachte fout opgetreden tijdens het genereren van je PDF",
+  "pdfReady": "PDF gegenereerd",
+  "processingUpdate": "Verwerking bijwerken",
+  "settingsSaved": "Instellingen opgeslagen",
+  "updatingSettings": "Instellingen bijwerken"
+}

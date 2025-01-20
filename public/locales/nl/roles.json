@@ -1,0 +1,11 @@
+{
+  "readNone": "Geen lezen",
+  "readSome": "Enkele lezen",
+  "readOnly": "Alleen lezen",
+  "writeSome": "Schrijf wat",
+  "user": "Gebruiker",
+  "curator": "Curator",
+  "bughunter": "Insectenjager",
+  "support": "Ondersteuning",
+  "admin": "Admin"
+}
