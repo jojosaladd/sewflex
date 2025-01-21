@@ -214,14 +214,14 @@ export const DraftHeader = ({
             </button>
           ))}
         </div>
-        <div className="flex flex-row items-center gap-4">
+        {/* <div className="flex flex-row items-center gap-4">
           <IconButton
             Icon={KioskIcon}
             dflt={ui.kiosk ? false : true}
             onClick={() => update.ui(['kiosk'], ui.kiosk ? 0 : 1)}
             title={t('ui-settings:kiosk.t')}
           />
-        </div>
+        </div> */}
         <div className="flex flex-row items-center gap-4">
           <IconButton
             Icon={RocketIcon}

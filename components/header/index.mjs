@@ -43,38 +43,38 @@ const NavIcons = ({ setModal }) => {
       >
         <RocketIcon className={iconSize} />
       </NavButton>
-      <NavButton href="https://freesewing.dev/" label={t('sde:docs')} color={spectrum[3]}>
+      <NavButton href="https://freesewing.dev/" label={t('Instructions')} color={spectrum[3]}>
         <DocsIcon className={iconSize} />
       </NavButton>
-      <NavButton
+      {/* <NavButton
         href="http://github.com/freesewing/freesewing"
-        label={t('sde:code')}
+        label={t('Consent Form')}
         color={spectrum[4]}
       >
         <GitHubIcon className={iconSize} />
-      </NavButton>
-      <NavButton href="https://freesewing.org/support" label={t('sde:support')} color={spectrum[5]}>
+      </NavButton> */}
+      {/* <NavButton href="https://freesewing.org/support" label={t('sde:support')} color={spectrum[5]}>
         <HelpIcon className={iconSize} />
       </NavButton>
-      <NavSpacer />
-      <NavButton
+      <NavSpacer /> */}
+      {/* <NavButton
         onClick={() => setModal(<ModalThemePicker />)}
         label={t('header:theme')}
         color={spectrum[6]}
       >
         <ThemeIcon className={iconSize} />
-      </NavButton>
-      <NavButton
+      </NavButton> */}
+      {/* <NavButton
         onClick={() => setModal(<ModalLocalePicker />)}
         label={t('header:language')}
         color={spectrum[7]}
       >
         <I18nIcon className={iconSize} />
-      </NavButton>
-      <NavSpacer />
+      </NavButton> */}
+      {/* <NavSpacer />
       <NavButton href="/signin" label={t('susi:signIn')} color={spectrum[8]}>
         <LockIcon className={iconSize} />
-      </NavButton>
+      </NavButton> */}
     </>
   )
 }

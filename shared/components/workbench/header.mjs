@@ -101,7 +101,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
       {control >= controlLevels.views.measies && (
         <NavButton
           onClick={() => setView('measies')}
-          label={t('workbench:measies')}
+          label={t('Choose Your Size')}
           active={view === 'measies'}
         >
           <MeasieIcon className={iconSize} />

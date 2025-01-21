@@ -24,14 +24,11 @@ export const Footer = () => {
   return (
     <footer className="bg-neutral">
       <div className="w-full sm:w-auto flex flex-col gap-2 items-center justify-center pt-12">
-        <FreeSewingIcon className="w-24 lg:w-40 m-auto m-auto text-neutral-content" />
         <div className="mt-4">
-          <WordMark />
         </div>
         <p className="text-neutral-content text-normal leading-5 text-center -mt-2 opacity-70 font-normal">
-          {t('common:slogan1')}
-          <br />
-          {t('common:slogan2')}
+          If you have any questions or concerns, please email Joanna Yoo at <br />
+          <a href="mailto:sy797@cornell.com" className="underline hover:text-primary">sy797@cornell.com</a>.
         </p>
       </div>
 
@@ -47,13 +44,13 @@ export const Footer = () => {
         </ul>
       </div>
 
-      <div className="w-full sm:w-auto flex flex-row flex-wrap gap-6 lg:gap-8 items-center justify-center px-8 py-14">
+      {/* <div className="w-full sm:w-auto flex flex-row flex-wrap gap-6 lg:gap-8 items-center justify-center px-8 py-14">
         <SocialIcons />
-      </div>
+      </div> */}
 
-      <div className="mt-8 py-8 px-8 flex flex-row gap-8 flex-wrap 2xl:flex-nowrap justify-around text-neutral-content py-10 border border-solid border-l-0 border-r-0 border-b-0 border-base-300">
+      {/* <div className="mt-8 py-8 px-8 flex flex-row gap-8 flex-wrap 2xl:flex-nowrap justify-around text-neutral-content py-10 border border-solid border-l-0 border-r-0 border-b-0 border-base-300">
         <Sponsors />
-      </div>
+      </div> */}
     </footer>
   )
 }

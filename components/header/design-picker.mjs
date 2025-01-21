@@ -13,7 +13,7 @@ export const ModalDesignPicker = () => {
   return (
     <ModalWrapper flex="col" justify="top lg:justify-center" slideFrom="left">
       <div className="max-w-xl">
-        <h2>{t('sde:chooseATemplate')}</h2>
+        <h2>{t('Choose Your')}</h2>
         <div className="flex flex-row p-4 w-full flex-wrap gap-2">
           {collection.map((d) => (
             <Link
@@ -25,6 +25,11 @@ export const ModalDesignPicker = () => {
               border border-secondary hover:border hover:border-secondary
                 `}
             >
+                {/* Image Placeholder */}
+                <div className="w-full h-40 bg-pink-500 rounded-md flex items-center justify-center">
+                <span className="text-white text-sm font-bold">Placeholder</span>
+              </div>
+
               <div className="text-lg font-bold">{t(`sde:${d}.t`)}</div>
               <div className={`normal-case text-base-content`}>{t(`sde:${d}.d`)}</div>
             </Link>

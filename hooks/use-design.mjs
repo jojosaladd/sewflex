@@ -12,8 +12,8 @@ const designs = {
   frombrian: FromBrian,
   frombent: FromBent,
   fromtitan: FromTitan,
-  frombella: FromBella,
-  frombreanna: FromBreanna,
+  frombella: FromBella
+  //frombreanna: FromBreanna,
 }
 
 export const useDesign = (design) => (designs[design] ? designs[design] : false)

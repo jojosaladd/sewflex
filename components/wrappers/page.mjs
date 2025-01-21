@@ -7,7 +7,7 @@ import { LayoutWrapper } from 'site/components/wrappers/layout.mjs'
 
 /* This component should wrap all page content */
 export const PageWrapper = ({
-  title = 'FIXME: No title set',
+  title = 'rolo',
   app = false,
   layout = false,
   children = [],

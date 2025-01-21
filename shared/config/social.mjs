@@ -1,3 +1,4 @@
+//  __SDEFILE__ - This file is a dependency for the stand-alone environment
 export const social = {
   YouTube: 'https://www.youtube.com/@freesewing',
   Discord: 'https://discord.freesewing.org/',
@@ -6,8 +7,5 @@ export const social = {
   GitHub: 'https://github.com/freesewing',
   Reddit: 'https://www.reddit.com/r/freesewing/',
   Mastodon: 'https://freesewing.social/@freesewing',
-  Bluesky: 'https://bsky.app/profile/freesewing.org',
-}
-ocial/@freesewing',
   Bluesky: 'https://bsky.app/profile/freesewing.org',
 }

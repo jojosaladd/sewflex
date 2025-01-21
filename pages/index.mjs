@@ -23,30 +23,17 @@ const HomePage = ({ page }) => {
   return (
     <PageWrapper {...page} title={false}>
       <div className="max-w-prose text-center">
-        <FreeSewingIcon className="w-36 h-36 m-auto" />
-        <h1>FreeSewing</h1>
+        <h1>SewFlex</h1>
+        <h3>Automated Pattern Adjustment for Home Sewers</h3>
       </div>
       <div className="max-w-prose">
-        <h5>{t('sde:welcomeToSde')}</h5>
-        <p>{t('sde:templatesAvailable')}</p>
-        <ul className="list list-inside list-disc ml-4">
-          {collection.map((d) => (
-            <li key={d}>
-              <b>
-                <PageLink txt={t(`sde:${d}.t`)} href={`/design/${d}`} />
-              </b>
-              :<span className="pl-2">{t(`sde:${d}.d`)}</span>
-            </li>
-          ))}
-        </ul>
-        <p>{t('sde:signIn')}</p>
-        <p>{t('sde:signOff')} : )</p>
-        <p>joost</p>
-        <p>
-          <WebLink href="https://freesewing.org/patrons/join" txt={t('sde:ps')} />.
-        </p>
+        <p>Hello, I'm Joanna. Thank you for participating in Part 2: Tool Testing/Interview for my master's thesis study, <strong>"Developing an Automated Pattern Adjustment System for Home Sewers"</strong>.</p>
+        <p>We're exploring how to improve fit accuracy for home sewers who don't fit standard pattern sizes. Your participation will help us understand if an automated adjustment tool can make home sewing more accessible and enjoyable.</p>
+        <p>Here, we will add more info later? consent form , steps blah blah</p>
+
       </div>
-      <p className="text-center text-sm mt-12 opacity-60">FreeSewing v{version}</p>
+      <p className="text-center text-sm mt-12 opacity-60">SewFlex is adapted from the FreeSewing open-source project (FreeSewing.dev API) and extends its functionality to provide an intuitive and user-friendly solution for automating pattern adjustments for non-standard petite and curvy body sizing. For more information about this API, please visit the <strong><a href="https://freesewing.dev/" target="_blank" rel="noopener noreferrer">FreeSewing.dev</a></strong>.</p>
+
     </PageWrapper>
   )
 }

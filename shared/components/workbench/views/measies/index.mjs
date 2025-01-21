@@ -35,7 +35,7 @@ export const MeasiesView = ({ design, Design, settings, update, missingMeasureme
 
   return (
     <div className="max-w-7xl mt-8 mx-auto px-4">
-      <h2>{t('account:measurements')}</h2>
+      <h2>{t('Choose Your Size')}</h2>
       {missingMeasurements &&
         settings.measurements &&
         Object.keys(settings.measurements).length > 0 && (
