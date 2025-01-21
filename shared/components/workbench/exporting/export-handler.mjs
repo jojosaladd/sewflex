@@ -127,7 +127,7 @@ export const handleExport = async ({
       // save it out
       if (e.data.blob) {
         const fileType = exportTypes.exportForPrinting.indexOf(format) === -1 ? format : 'pdf'
-        fileSaver.saveAs(e.data.blob, `freesewing-${design || 'pattern'}.${fileType}`)
+        fileSaver.saveAs(e.data.blob, `Your Pattern-${design || 'pattern'}.${fileType}`)
       }
       // do additional business
       onComplete && onComplete(e)

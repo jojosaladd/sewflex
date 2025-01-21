@@ -143,7 +143,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
           <CutIcon className={iconSize} />
         </NavButton>
       )*/}
-      {control >= controlLevels.views.save && (
+      {/* {control >= controlLevels.views.save && (
         <NavButton
           onClick={() => setView('save')}
           label={t(`workbench:${saveAs ? 'savePattern' : 'savePatternAsHellip'}`)}
@@ -151,7 +151,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
         >
           {saveAs ? <SaveIcon className={iconSize} /> : <SaveAsIcon className={iconSize} />}
         </NavButton>
-      )}
+      )} */}
       {control >= controlLevels.views.export && (
         <NavButton
           onClick={() => setView('export')}
@@ -188,7 +188,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
           <XrayIcon className={iconSize} />
         </NavButton>
       )}
-      {control >= controlLevels.views.docs && (
+      {/* {control >= controlLevels.views.docs && (
         <NavButton
           onClick={() => setView('docs')}
           label={t('workbench:docs')}
@@ -196,7 +196,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
         >
           <DocsIcon className={iconSize} />
         </NavButton>
-      )}
+      )} */}
     </>
   )
 }

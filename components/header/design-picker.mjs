@@ -13,7 +13,7 @@ export const ModalDesignPicker = () => {
   return (
     <ModalWrapper flex="col" justify="top lg:justify-center" slideFrom="left">
       <div className="max-w-xl">
-        <h2>{t('Choose Your')}</h2>
+        <h2>{t('Choose Your Design')}</h2>
         <div className="flex flex-row p-4 w-full flex-wrap gap-2">
           {collection.map((d) => (
             <Link
