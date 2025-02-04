@@ -125,7 +125,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
           <GaugeIcon className={iconSize} />
         </NavButton>
       )}
-      {control >= controlLevels.views.print && (
+      {/* {control >= controlLevels.views.print && (
         <NavButton
           onClick={() => setView('print')}
           label={t('workbench:printLayout')}
@@ -133,7 +133,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
         >
           <PrintIcon className={iconSize} />
         </NavButton>
-      )}
+      )} */}
       {/*!isProduction && (
         <NavButton
           onClick={() => setView('cut')}

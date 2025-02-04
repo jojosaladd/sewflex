@@ -1,5 +1,5 @@
 import { Design } from '@freesewing/core'
-import { i18n } from '../i18n/index.mjs'
+import { i18n } from '../i18n/index.mjs' //translation to different langugae
 import { bib } from './bib.mjs'
 
 /*

@@ -58,12 +58,12 @@ export const DraftMenu = ({
       icon: <SettingsIcon className="w-8 h-8" />,
       menu: <CoreSettings {...menuProps} />,
     },
-    {
-      name: 'uiSettings',
-      ns: 'ui-settings',
-      icon: <DesktopIcon className="w-8 h-8" />,
-      menu: <UiSettings {...menuProps} {...{ ui, view, setView }} />,
-    },
+    // {
+    //   name: 'uiSettings',
+    //   ns: 'ui-settings',
+    //   icon: <DesktopIcon className="w-8 h-8" />,
+    //   menu: <UiSettings {...menuProps} {...{ ui, view, setView }} />,
+    // },
   ]
 
   const items = []

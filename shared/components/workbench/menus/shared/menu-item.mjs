@@ -12,8 +12,12 @@ import { optionType } from 'shared/utils.mjs'
  * @param  {Object} config  configuration containing a dflt key
  * @return {Boolean}         was the value changed?
  */
+
+
 export const wasChanged = (current, config) => {
-  if (typeof current === 'undefined') return false
+  if (typeof current === 'undefined' || current === null) {
+    return false;  
+    }
   if (current == config.dflt) return false
 
   return true
