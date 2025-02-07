@@ -89,15 +89,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
           <LeftIcon className={`${iconSize} animate-bounce-right`} stroke={4} />
         )}
       </NavButton>
-      {control >= controlLevels.views.draft && (
-        <NavButton
-          onClick={() => setView('draft')}
-          label={t('workbench:patternEditor')}
-          active={view === 'draft'}
-        >
-          <OptionsIcon className={iconSize} />
-        </NavButton>
-      )}
+     
       {control >= controlLevels.views.measies && (
         <NavButton
           onClick={() => setView('measies')}
@@ -105,6 +97,15 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
           active={view === 'measies'}
         >
           <MeasieIcon className={iconSize} />
+        </NavButton>
+      )}
+       {control >= controlLevels.views.draft && (
+        <NavButton
+          onClick={() => setView('draft')}
+          label={t('workbench:patternEditor')}
+          active={view === 'draft'}
+        >
+          <OptionsIcon className={iconSize} />
         </NavButton>
       )}
       {control >= controlLevels.views.test && (
@@ -170,7 +171,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
           <EditIcon className={iconSize} />
         </NavButton>
       )}{' '}
-      {control >= controlLevels.views.logs && (
+      {/* {control >= controlLevels.views.logs && (
         <NavButton
           onClick={() => setView('logs')}
           label={t('workbench:patternLogs')}
@@ -178,7 +179,7 @@ const NavIcons = ({ setView, setDense, dense, view, saveAs = false, control }) =
         >
           <CodeIcon className={iconSize} />
         </NavButton>
-      )}
+      )} */}
       {control >= controlLevels.views.inspect && (
         <NavButton
           onClick={() => setView('inspect')}

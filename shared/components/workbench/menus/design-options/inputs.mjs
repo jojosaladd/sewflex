@@ -11,27 +11,31 @@ import {
 } from '../shared/inputs.mjs'
 
 const PctOptionInput = (props) => {
-  const { config, settings, changed } = props
-  const currentOrDefault = changed ? props.current : config.dflt
+  const { config, settings, changed } = props;
+  const currentOrDefault = changed ? props.current : config.dflt;
+
+  console.log("Current units:", settings.units); // Debugging output
 
   return (
     <PctInput {...props}>
       <div className="flex flex-row justify-around">
-        <span className={changed ? 'text-accent' : 'text-secondary'}>
+        <span className={changed ? "text-accent" : "text-secondary"}>
           {config.toAbs
             ? formatMm(
                 config.toAbs(
                   currentOrDefault,
                   settings,
                   mergeOptions(settings, props.patternConfig.options)
-                )
+                ),
+                settings.units // Pass units explicitly to formatMm
               )
-            : ' '}
+            : " "}
         </span>
       </div>
     </PctInput>
-  )
-}
+  );
+};
+
 
 // Facilitate lookup of the input component
 export const inputs = {

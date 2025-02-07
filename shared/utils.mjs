@@ -93,11 +93,16 @@ export const formatFraction128 = (fraction, format = 'html') => {
 export const formatMm = (val, units, format = 'html') => {
   val = roundMm(val)
   if (units === 'imperial' || units === true) {
-    if (val == 0) return formatImperial('', 0, false, false, format)
+    if (val == 0) return "0 inches"; // Ensure zero case returns correctly
 
-    let fraction = val / 25.4
-    return formatFraction128(fraction, format)
+    let inches = val / 25.4;
+    let roundedInches = Math.round(inches * 8) / 8;
+
+    console.log(`Converted ${val} mm to ${inches} inches → Rounded: ${roundedInches} inches`); // Debugging
+    if (roundedInches == 1) return roundedInches + ' inch';
+    return roundedInches + ' inches'; 
   } else {
+    ////cm ui
     if (format === 'html' || format === 'notags') return roundMm(val / 10) + 'cm'
     else return roundMm(val / 10)
   }
