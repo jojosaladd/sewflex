@@ -55,6 +55,14 @@ export const MeasiesView = ({ update, setView }) => {
   const [selectedBodyType, setSelectedBodyType] = useState("Standard")
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null)
 
+    // Reset function to revert everything to default values
+  const resetValues = () => {
+    setSelectedSize(6);
+    setSelectedBodyType("Standard");
+    setAdjustedMeasurements(interpolateMeasurements(6));
+    console.log("🔄 Reset to defaults: Size 6, Standard body type");
+  };
+
   const sizeMeasurements = {
     0: { bust: 30, waist: 24, hip: 33, len: 50, width: 50 },
     2: { bust: 31, waist: 25, hip: 34, len: 52, width: 52 },
@@ -160,7 +168,19 @@ export const MeasiesView = ({ update, setView }) => {
             ? <span>You selected: <strong>{selectedBodyType}</strong></span>
             : t('bodytype description')}
         </p>
-        <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
+
+        <div className="flex flex-col gap-4">
+
+          <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
+          
+          <button
+            onClick={resetValues}
+            className="w-28 px-4 py-2 bg-gray-400 text-white rounded"
+          >
+            Reset
+          </button>
+
+        </div>
 
         {/* Show adjusted measurements for debugging */}
         {adjustedMeasurements && (
@@ -181,7 +201,7 @@ export const MeasiesView = ({ update, setView }) => {
             disabled={selectedSize === null || selectedBodyType === null}
             className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           >
-            {t('next')}
+            {t('Go to Pattern Editor')}
           </button>
         </div>
       </Fragment>
