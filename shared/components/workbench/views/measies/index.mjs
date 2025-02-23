@@ -48,36 +48,79 @@ const BodyTypePicker = ({ selectBodyType, selectedBodyType }) => {
   )
 }
 
+
 export const MeasiesView = ({ update, setView }) => {
   const { t } = useTranslation(['workbench'])
-  const [selectedSize, setSelectedSize] = useState(null)
-  const [selectedBodyType, setSelectedBodyType] = useState(null)
+  const [selectedSize, setSelectedSize] = useState(6)
+  const [selectedBodyType, setSelectedBodyType] = useState("Standard")
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null)
 
   const sizeMeasurements = {
-    0: { bust: 30, waist: 24, hip: 33, length: 50, width: 50 },
-    2: { bust: 31, waist: 25, hip: 34, length: 52, width: 52 },
-    4: { bust: 32, waist: 26, hip: 35, length: 54, width: 54 },
-    6: { bust: 34, waist: 28, hip: 37, length: 56, width: 56 },
-    8: { bust: 36, waist: 30, hip: 39, length: 58, width: 58 },
-    10: { bust: 38, waist: 32, hip: 41, length: 60, width: 60 },
-    12: { bust: 40, waist: 34, hip: 43, length: 62, width: 62 },
-    14: { bust: 42, waist: 36, hip: 45, length: 64, width: 64 },
-    16: { bust: 44, waist: 38, hip: 47, length: 66, width: 66 },
+    0: { bust: 30, waist: 24, hip: 33, len: 50, width: 50 },
+    2: { bust: 31, waist: 25, hip: 34, len: 52, width: 52 },
+    4: { bust: 32, waist: 26, hip: 35, len: 54, width: 54 },
+    6: { bust: 34, waist: 28, hip: 37, len: 56, width: 56 },
+    8: { bust: 36, waist: 30, hip: 39, len: 58, width: 58 },
+    10: { bust: 38, waist: 32, hip: 41, len: 60, width: 60 },
+    12: { bust: 40, waist: 34, hip: 43, len: 62, width: 62 },
+    14: { bust: 42, waist: 36, hip: 45, len: 64, width: 64 },
+    16: { bust: 44, waist: 38, hip: 47, len: 66, width: 66 },
   }
+
+  const getClosestLowerSize = (size) => {
+    const sizes = Object.keys(sizeMeasurements).map(Number); // Convert object keys to numbers
+    return Math.max(...sizes.filter(s => s <= size)); // Find largest valid size <= input size
+  };
+  
+  const getClosestUpperSize = (size) => {
+    const sizes = Object.keys(sizeMeasurements).map(Number); // Convert object keys to numbers
+    return Math.min(...sizes.filter(s => s >= size)); // Find smallest valid size >= input size
+  };
+  
+
+  const interpolateMeasurements = (size) => {
+    console.log("what size?", size)
+
+    const lowerSize = getClosestLowerSize(size); 
+    const upperSize = getClosestUpperSize(size);
+    
+    console.log("lowerSize?", lowerSize);
+    console.log("upperSize?", upperSize);
+
+    if (size === lowerSize) {
+      console.log("✅ Exact size match! Returning without interpolation.");
+      return sizeMeasurements[lowerSize];
+    }
+
+    const ratio = (size-lowerSize) / (upperSize-lowerSize)
+    console.log("Whats my ratio?", ratio)
+    const lowerMeasurements = sizeMeasurements[lowerSize];
+    const upperMeasurements = sizeMeasurements[upperSize];
+  
+    return {
+      bust: lowerMeasurements.bust + ratio * (upperMeasurements.bust - lowerMeasurements.bust),
+      waist: lowerMeasurements.waist + ratio * (upperMeasurements.waist - lowerMeasurements.waist),
+      hip: lowerMeasurements.hip + ratio * (upperMeasurements.hip - lowerMeasurements.hip),
+      len: lowerMeasurements.len + ratio * (upperMeasurements.len - lowerMeasurements.len),
+      width: lowerMeasurements.width + ratio * (upperMeasurements.width - lowerMeasurements.width),
+    };
+  };
+  
 
   // Update measurements when size or body type changes
   useEffect(() => {
-    if (selectedSize !== null) {
-      let newMeasurements = { ...sizeMeasurements[selectedSize] }
+    const newMeasurements = interpolateMeasurements(selectedSize);
 
-      // Adjust for Petite and Petite-Curvy
+    if (newMeasurements) {
+      let adjusted = { ...newMeasurements };
+  
+      // Petite 조정 적용
       if (selectedBodyType === 'Petite' || selectedBodyType === 'Petite-Curvy') {
-        newMeasurements.length -= 10
-        newMeasurements.width -= 10
+        adjusted.len -= 10;
+        adjusted.width -= 10;
       }
-
-      setAdjustedMeasurements(newMeasurements)
+  
+      setAdjustedMeasurements(adjusted); 
     }
   }, [selectedSize, selectedBodyType])
 
@@ -98,10 +141,23 @@ export const MeasiesView = ({ update, setView }) => {
         <h5>{t('Choose Your Size')}</h5>
         <SizeChartPicker selectSize={setSelectedSize} selectedSize={selectedSize} />
 
+        {/* Size Adjustment Slider */}
+        <h5>Fine Tune Your Size</h5>
+        <input
+          type="range"
+          min="0"
+          max="16"
+          step="0.5"
+          value={selectedSize}
+          onChange={(e) => setSelectedSize(parseFloat(e.target.value))}
+          className="w-full mt-2"
+        />
+        <p>Selected Size: <strong>{selectedSize}</strong></p>
+
         <h5>{t('BodyType')}</h5>
         <p>
           {selectedBodyType 
-            ? <span>You selected <strong>{selectedBodyType}</strong></span>
+            ? <span>You selected: <strong>{selectedBodyType}</strong></span>
             : t('bodytype description')}
         </p>
         <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
@@ -113,7 +169,7 @@ export const MeasiesView = ({ update, setView }) => {
             <p>Bust: {adjustedMeasurements.bust}</p>
             <p>Waist: {adjustedMeasurements.waist}</p>
             <p>Hip: {adjustedMeasurements.hip}</p>
-            <p>Length: {adjustedMeasurements.length}</p>
+            <p>Length: {adjustedMeasurements.len}</p>
             <p>Width: {adjustedMeasurements.width}</p>
           </div>
         )}

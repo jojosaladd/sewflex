@@ -15,11 +15,11 @@ function draftFront({
 
     // Use options as percentage-based adjustments
     let width = measurements.width * (options.width);
-    let length = measurements.length * (options.length);
+    let len = measurements.len * (options.len);
 
     // Define rectangle corners based on measurements
     points.topLeft = new Point(0, 0);
-    points.bottomRight = new Point(width, length);
+    points.bottomRight = new Point(width, len);
     points.topRight = new Point(points.bottomRight.x, points.topLeft.y);
     points.bottomLeft = new Point(points.topLeft.x, points.bottomRight.y);
 
@@ -41,9 +41,9 @@ function draftFront({
 export const front = {
   name: 'fromscratch.front',
   draft: draftFront,
-  measurements: ['length', 'width'], // Standard FreeSewing measurements
+  measurements: ['len', 'width'], // Standard FreeSewing measurements
   options: {
-    length: {
+    len: {
       pct: 100, // Default to 100% (same as measurement)
       min: 50, // Allow reduction down to 50%
       max: 150, // Allow increase up to 150%
