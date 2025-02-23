@@ -2,14 +2,7 @@
 import { spectrum, rating, graph } from 'shared/themes/index.mjs'
 import useLocalStorageState from 'use-local-storage-state'
 
-const preferredTheme = () => {
-  const prefersDarkMode =
-    typeof window !== 'undefined' && typeof window.matchMedia === 'function'
-      ? window.matchMedia(`(prefers-color-scheme: dark`).matches
-      : undefined
-
-  return prefersDarkMode ? 'dark' : 'light'
-}
+const preferredTheme = () => 'monochrome'
 
 export const useTheme = () => {
   const theme = useLocalStorageState('fs-theme', { defaultValue: preferredTheme })
