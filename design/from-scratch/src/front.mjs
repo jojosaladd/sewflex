@@ -48,14 +48,14 @@ export const front = {
       min: 50, // Allow reduction down to 50%
       max: 150, // Allow increase up to 150%
       menu: 'fit',
-      toAbs: (val, { measurements }) => measurements.width * val
+      toAbs: (val, { measurements }) => measurements.chest * val
     },
     waist: {
       pct: 100, // Default to 100%
       min: 50, 
       max: 150, 
       menu: 'fit',
-      toAbs: (val, { measurements }) => measurements.width * val
+      toAbs: (val, { measurements }) => measurements.waist * val
 
     },
   },
