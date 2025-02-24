@@ -48,7 +48,7 @@ const BodyTypePicker = ({ selectBodyType, selectedBodyType }) => {
   );
 };
 
-export const MeasiesView = ({ update, setView, Design }) => {
+export const MeasiesView = ({ update, setView, Design, settings }) => {
   const { t } = useTranslation(['workbench']);
   const [selectedSize, setSelectedSize] = useState(6);
   const [selectedBodyType, setSelectedBodyType] = useState("Standard");
@@ -56,6 +56,17 @@ export const MeasiesView = ({ update, setView, Design }) => {
 
   // Get the list of measurements required for the current pattern
   const requiredMeasurements = Design?.patternConfig?.measurements || [];
+
+  // Toggle Units Function
+  const toggleUnits = () => {
+    const newUnit = settings.units === 'imperial' ? 'metric' : 'imperial';
+    update.settings(['units'], newUnit);
+  };
+
+  // Convert measurements based on unit system
+  const convertMeasurement = (value) => {
+    return settings.units === 'imperial' ? (value / 25.4).toFixed(2) : value / 10; // Convert mm to inches if imperial
+  };
 
   // Get the closest smaller and larger size
   const getClosestLowerSize = (size) => Math.max(...Object.keys(astmData).map(Number).filter(s => s <= size));
@@ -111,7 +122,7 @@ export const MeasiesView = ({ update, setView, Design }) => {
   const handleNext = () => {
     update.settings([
       [['measurements'], adjustedMeasurements],
-      [['units'], 'metric'],
+      [['units'], settings.units], // Ensure correct units are stored
       [['bodytype'], selectedBodyType || 'Standard']
     ]);
     setView('draft');
@@ -120,6 +131,16 @@ export const MeasiesView = ({ update, setView, Design }) => {
   return (
     <div className="max-w-7xl mt-8 mx-auto px-4">
       <h2>{t('account:measurements')}</h2>
+
+      {/* Unit System Toggle Button */}
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={toggleUnits}
+          className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-focus transition"
+        >
+          {settings.units === 'imperial' ? "Switch to Metric (cm)" : "Switch to Imperial (inches)"}
+        </button>
+      </div>
 
       <Fragment>
         <h5>{t('Choose Your Size')}</h5>
@@ -159,9 +180,15 @@ export const MeasiesView = ({ update, setView, Design }) => {
         {/* Show only measurements required by the current pattern */}
         {Object.keys(relevantMeasurements).length > 0 && (
           <div className="mt-4 p-2 bg-gray-100 border rounded">
-            <p><strong>Current Body Measurements (in mm):</strong></p>
+            <p><strong>Current Body Measurements (cm):</strong></p>
             {Object.entries(relevantMeasurements).map(([key, value]) => (
-              <p key={key}>{key}: {value.toFixed(2)}</p>
+              <p 
+                key={key} 
+                data-measurement={key} // This will help link it to the SVG later
+                className="hover:text-blue-500 cursor-pointer" // Temporary hover effect
+              >
+                {key}: {convertMeasurement(value)}
+              </p>
             ))}
           </div>
         )}
