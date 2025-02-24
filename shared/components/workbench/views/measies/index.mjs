@@ -201,7 +201,7 @@ export const MeasiesView = ({ update, setView }) => {
         {/* Show adjusted measurements for debugging */}
         {adjustedMeasurements && (
           <div className="mt-4 p-2 bg-gray-100 border rounded">
-            <p><strong>Adjusted Measurements:</strong></p>
+            <p><strong>Current Body Measurements (in mm):</strong></p>
             <p>Bust: {adjustedMeasurements.bust}</p>
             <p>Waist: {adjustedMeasurements.waist}</p>
             <p>Hip: {adjustedMeasurements.hip}</p>
