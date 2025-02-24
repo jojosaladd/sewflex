@@ -4,9 +4,14 @@ import { Popout } from 'shared/components/popout/index.mjs'
 
 // Size Chart Picker Component
 const SizeChartPicker = ({ selectSize, selectedSize }) => {
-  const sizes = [0, 2, 4, 6, 8, 10, 12, 14, 16]
+  const sizes = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+
+  // Check if the selected size is NOT in the predefined list
+  const isCustom = !sizes.includes(selectedSize);
+
   return (
     <div className="flex flex-wrap gap-2 mt-2">
+      {/* Predefined Sizes */}
       {sizes.map((size) => (
         <button
           key={size}
@@ -18,9 +23,20 @@ const SizeChartPicker = ({ selectSize, selectedSize }) => {
           Size {size}
         </button>
       ))}
+
+      {/* Custom Size Button */}
+      <button
+        onClick={() => selectSize(selectedSize)} // Clicking "Custom" doesn't change size
+        className={`px-4 py-2 border rounded bg-gray-200 hover:bg-gray-300 ${
+          isCustom ? 'border-blue-500 animate-pulse' : ''
+        }`}
+      >
+        Custom
+      </button>
     </div>
-  )
-}
+  );
+};
+
 
 // Body Type Picker Component
 const BodyTypePicker = ({ selectBodyType, selectedBodyType }) => {
