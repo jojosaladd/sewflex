@@ -4,9 +4,14 @@ import { Popout } from 'shared/components/popout/index.mjs'
 
 // Size Chart Picker Component
 const SizeChartPicker = ({ selectSize, selectedSize }) => {
-  const sizes = [0, 2, 4, 6, 8, 10, 12, 14, 16]
+  const sizes = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+
+  // Check if the selected size is NOT in the predefined list
+  const isCustom = !sizes.includes(selectedSize);
+
   return (
     <div className="flex flex-wrap gap-2 mt-2">
+      {/* Predefined Sizes */}
       {sizes.map((size) => (
         <button
           key={size}
@@ -18,9 +23,20 @@ const SizeChartPicker = ({ selectSize, selectedSize }) => {
           Size {size}
         </button>
       ))}
+
+      {/* Custom Size Button */}
+      <button
+        onClick={() => selectSize(selectedSize)} // Clicking "Custom" doesn't change size
+        className={`px-4 py-2 border rounded bg-gray-200 hover:bg-gray-300 ${
+          isCustom ? 'border-blue-500 animate-pulse' : ''
+        }`}
+      >
+        Custom
+      </button>
     </div>
-  )
-}
+  );
+};
+
 
 // Body Type Picker Component
 const BodyTypePicker = ({ selectBodyType, selectedBodyType }) => {
@@ -54,6 +70,14 @@ export const MeasiesView = ({ update, setView }) => {
   const [selectedSize, setSelectedSize] = useState(6)
   const [selectedBodyType, setSelectedBodyType] = useState("Standard")
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null)
+
+    // Reset function to revert everything to default values
+  const resetValues = () => {
+    setSelectedSize(6);
+    setSelectedBodyType("Standard");
+    setAdjustedMeasurements(interpolateMeasurements(6));
+    console.log("🔄 Reset to defaults: Size 6, Standard body type");
+  };
 
   const sizeMeasurements = {
     0: { bust: 30, waist: 24, hip: 33, len: 50, width: 50 },
@@ -160,12 +184,24 @@ export const MeasiesView = ({ update, setView }) => {
             ? <span>You selected: <strong>{selectedBodyType}</strong></span>
             : t('bodytype description')}
         </p>
-        <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
+
+        <div className="flex flex-col gap-4">
+
+          <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
+          
+          <button
+            onClick={resetValues}
+            className="w-28 px-4 py-2 bg-gray-400 text-white rounded"
+          >
+            Reset
+          </button>
+
+        </div>
 
         {/* Show adjusted measurements for debugging */}
         {adjustedMeasurements && (
           <div className="mt-4 p-2 bg-gray-100 border rounded">
-            <p><strong>Adjusted Measurements:</strong></p>
+            <p><strong>Current Body Measurements (in mm):</strong></p>
             <p>Bust: {adjustedMeasurements.bust}</p>
             <p>Waist: {adjustedMeasurements.waist}</p>
             <p>Hip: {adjustedMeasurements.hip}</p>
@@ -181,7 +217,7 @@ export const MeasiesView = ({ update, setView }) => {
             disabled={selectedSize === null || selectedBodyType === null}
             className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           >
-            {t('next')}
+            {t('Go to Pattern Editor')}
           </button>
         </div>
       </Fragment>
