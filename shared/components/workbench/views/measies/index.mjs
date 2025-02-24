@@ -4,7 +4,7 @@ import { Popout } from 'shared/components/popout/index.mjs';
 import astmData from 'shared/components/measurements/astm.json';
 
 const SizeChartPicker = ({ selectSize, selectedSize }) => {
-  const sizes = Object.keys(astmData).map(Number).sort((a, b) => a - b); // Convert JSON keys to numbers
+  const sizes = Object.keys(astmData).map(Number).sort((a, b) => a - b);
 
   return (
     <div className="flex flex-wrap gap-2 mt-2">
@@ -48,11 +48,14 @@ const BodyTypePicker = ({ selectBodyType, selectedBodyType }) => {
   );
 };
 
-export const MeasiesView = ({ update, setView }) => {
+export const MeasiesView = ({ update, setView, Design }) => {
   const { t } = useTranslation(['workbench']);
   const [selectedSize, setSelectedSize] = useState(6);
   const [selectedBodyType, setSelectedBodyType] = useState("Standard");
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null);
+
+  // Get the list of measurements required for the current pattern
+  const requiredMeasurements = Design?.patternConfig?.measurements || [];
 
   // Get the closest smaller and larger size
   const getClosestLowerSize = (size) => Math.max(...Object.keys(astmData).map(Number).filter(s => s <= size));
@@ -87,13 +90,23 @@ export const MeasiesView = ({ update, setView }) => {
 
       // Apply Petite adjustments
       if (selectedBodyType === 'Petite' || selectedBodyType === 'Petite-Curvy') {
-        adjusted.chest -= 10;
-        adjusted.waist -= 10;
+        adjusted.chest -= 500;
+        adjusted.waist -= 500;
       }
 
       setAdjustedMeasurements(adjusted);
     }
   }, [selectedSize, selectedBodyType]);
+
+  // Filter adjustedMeasurements to show only the ones needed for the current pattern
+  const relevantMeasurements = adjustedMeasurements
+    ? Object.keys(adjustedMeasurements)
+        .filter(key => requiredMeasurements.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = adjustedMeasurements[key];
+          return obj;
+        }, {})
+    : {};
 
   const handleNext = () => {
     update.settings([
@@ -143,11 +156,11 @@ export const MeasiesView = ({ update, setView }) => {
           </button>
         </div>
 
-        {/* Show adjusted measurements for debugging */}
-        {adjustedMeasurements && (
+        {/* Show only measurements required by the current pattern */}
+        {Object.keys(relevantMeasurements).length > 0 && (
           <div className="mt-4 p-2 bg-gray-100 border rounded">
             <p><strong>Current Body Measurements (in mm):</strong></p>
-            {Object.entries(adjustedMeasurements).map(([key, value]) => (
+            {Object.entries(relevantMeasurements).map(([key, value]) => (
               <p key={key}>{key}: {value.toFixed(2)}</p>
             ))}
           </div>
