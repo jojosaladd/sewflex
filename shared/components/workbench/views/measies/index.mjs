@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Popout } from 'shared/components/popout/index.mjs';
 import astmData from 'shared/components/measurements/astm.json';
+import measurementDescriptions from 'shared/components/measurements/measurementDescriptions.json';
 import Image from 'next/image'; // Import Next.js Image component
 
 const SizeChartPicker = ({ selectSize, selectedSize }) => {
@@ -55,6 +56,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   const [selectedBodyType, setSelectedBodyType] = useState("Standard");
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null);
   const [hoveredMeasurement, setHoveredMeasurement] = useState(null); // Track hover state
+  const [hoveredDescription, setHoveredDescription] = useState(""); 
 
   // Get the list of measurements required for the current pattern
   const requiredMeasurements = Design?.patternConfig?.measurements || [];
@@ -221,8 +223,14 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
                  key={key} 
                  data-measurement={key}
                  className="hover:text-blue-500 cursor-pointer"
-                 onMouseEnter={() => setHoveredMeasurement(key)}
-                 onMouseLeave={() => setHoveredMeasurement(null)}
+                 onMouseEnter={() => {
+                  setHoveredMeasurement(key);
+                  setHoveredDescription(measurementDescriptions[key] || "No description available.");
+                }}
+                onMouseLeave={() => {
+                  setHoveredMeasurement(null);
+                  setHoveredDescription("");
+                }}
                >
                  {key}: {convertMeasurement(value)}
                </p>
@@ -249,9 +257,13 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
           id="avatar-svg" 
           type="image/svg+xml" 
           data="/img/avatar.svg" 
-          className="w-[500px] h-auto"
-       ></object>
-      </div>
+          className="w-[500px] h-auto translate-y-[-20px]"
+        ></object>
+        
+        <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 text-center bg-white text-gray-700 text-lg p-4 rounded shadow-md w-[min(90%,500px)] max-w-full break-words">
+          {hoveredDescription}
+        </div>
+    </div>
     </div>
   );
 
