@@ -104,9 +104,26 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
       let adjusted = { ...newMeasurements };
 
       // Apply Petite adjustments UPDATE LATER! 
-      if (selectedBodyType === 'Petite' || selectedBodyType === 'Petite-Curvy') {
-        adjusted.chest -= 500;
-        adjusted.waist -= 500;
+      // if (selectedBodyType === 'Petite') {
+      //   adjusted.chest -= 500;
+      //   adjusted.waist -= 500;
+      // }
+
+      if (selectedBodyType === 'Standard-Curvy') {
+        adjusted.waist -= 38.1;
+        adjusted.seat += 19.05;
+        adjusted.waistToSeat += 3.18;
+        adjusted.waistToHips += 0;
+        adjusted.waistToKnee += 0;
+        adjusted.waistToArmpit += 0;
+        adjusted.hips -= 6.35;
+        adjusted.shoulderSlope += 0;
+        adjusted.shoulderToShoulder += 0;
+        adjusted.neck += 0;
+        adjusted.hpsToWaistBack += 0;
+        adjusted.hpsToBust += 0;
+        adjusted.chest += 0;
+        adjusted.biceps += 0; 
       }
 
       setAdjustedMeasurements(adjusted);
