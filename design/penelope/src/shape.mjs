@@ -27,7 +27,7 @@ export const options = {
   lengthBonus: { pct: 0, min: -50, max: 50, ...pctBasedOn('waistToKnee'), menu: 'style' },
   hemBonus: { pct: 0, min: -35, max: 0, ...pctBasedOn('seat'), menu: 'style' },
   hem: { pct: 2, min: 0, max: 5, ...pctBasedOn('waistToKnee'), menu: 'style' },
-  backVent: { bool: true, menu: 'style' },
+  backVent: { bool: false, menu: 'style' },
   backVentLength: {
     pct: 40,
     min: 5,

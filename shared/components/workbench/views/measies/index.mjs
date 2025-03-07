@@ -2,6 +2,8 @@ import { Fragment, useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { Popout } from 'shared/components/popout/index.mjs';
 import astmData from 'shared/components/measurements/astm.json';
+import measurementDescriptions from 'shared/components/measurements/measurementDescriptions.json';
+import Image from 'next/image'; // Import Next.js Image component
 
 const SizeChartPicker = ({ selectSize, selectedSize }) => {
   const sizes = Object.keys(astmData).map(Number).sort((a, b) => a - b);
@@ -53,6 +55,8 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   const [selectedSize, setSelectedSize] = useState(6);
   const [selectedBodyType, setSelectedBodyType] = useState("Standard");
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null);
+  const [hoveredMeasurement, setHoveredMeasurement] = useState(null); // Track hover state
+  const [hoveredDescription, setHoveredDescription] = useState(""); 
 
   // Get the list of measurements required for the current pattern
   const requiredMeasurements = Design?.patternConfig?.measurements || [];
@@ -99,15 +103,63 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
     if (newMeasurements) {
       let adjusted = { ...newMeasurements };
 
-      // Apply Petite adjustments
-      if (selectedBodyType === 'Petite' || selectedBodyType === 'Petite-Curvy') {
-        adjusted.chest -= 500;
-        adjusted.waist -= 500;
+      // Apply Petite adjustments UPDATE LATER! 
+      // if (selectedBodyType === 'Petite') {
+      //   adjusted.chest -= 500;
+      //   adjusted.waist -= 500;
+      // }
+
+      if (selectedBodyType === 'Standard-Curvy') {
+        adjusted.waist -= 38.1;
+        adjusted.seat += 19.05;
+        adjusted.waistToSeat += 3.18;
+        adjusted.waistToHips += 0;
+        adjusted.waistToKnee += 0;
+        adjusted.waistToArmpit += 0;
+        adjusted.hips -= 6.35;
+        adjusted.shoulderSlope += 0;
+        adjusted.shoulderToShoulder += 0;
+        adjusted.neck += 0;
+        adjusted.hpsToWaistBack += 0;
+        adjusted.hpsToBust += 0;
+        adjusted.chest += 0;
+        adjusted.biceps += 0; 
       }
 
       setAdjustedMeasurements(adjusted);
     }
   }, [selectedSize, selectedBodyType]);
+
+  useEffect(() => {
+    const svgObject = document.getElementById("avatar-svg");
+    if (svgObject) {
+      svgObject.addEventListener("load", () => {
+        const svgDoc = svgObject.contentDocument;
+        if (svgDoc) {
+          const layers = svgDoc.querySelectorAll("g[id]:not(#avatar)");
+          layers.forEach(layer => layer.style.display = "none");
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const svgObject = document.getElementById("avatar-svg");
+    if (svgObject) {
+      const svgDoc = svgObject.contentDocument;
+      if (svgDoc) {
+        const layers = svgDoc.querySelectorAll("g[id]:not(#avatar)");
+        layers.forEach(layer => layer.style.display = "none");
+        if (hoveredMeasurement) {
+          const activeLayer = svgDoc.getElementById(hoveredMeasurement);
+          if (activeLayer) {
+            activeLayer.style.display = "block";
+          }
+        }
+      }
+    }
+  }, [hoveredMeasurement]);
+
 
   // Filter adjustedMeasurements to show only the ones needed for the current pattern
   const relevantMeasurements = adjustedMeasurements
@@ -129,81 +181,107 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   };
 
   return (
-    <div className="max-w-7xl mt-8 mx-auto px-4">
-      <h2>{t('account:measurements')}</h2>
+    <div className="max-w-7xl mt-8 mx-auto px-4 flex">
+      {/* LEFT SIDE: Measurement selection */}
+      <div className="w-1/2 pr-8">
+        <h2>{t('account:measurements')}</h2>
 
-      {/* Unit System Toggle Button */}
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={toggleUnits}
-          className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-focus transition"
-        >
-          {settings.units === 'imperial' ? "Switch to Metric (cm)" : "Switch to Imperial (inches)"}
-        </button>
+        {/* Unit System Toggle Button */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={toggleUnits}
+            className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-focus transition"
+          >
+            {settings.units === 'imperial' ? "Switch to Metric (cm)" : "Switch to Imperial (inches)"}
+          </button>
+        </div>
+
+        <Fragment>
+          <h5>{t('Choose Your Size')}</h5>
+          <SizeChartPicker selectSize={setSelectedSize} selectedSize={selectedSize} />
+
+          {/* Size Adjustment Slider */}
+          <h5>Fine Tune Your Size</h5>
+          <input
+            type="range"
+            min="0"
+            max="16"
+            step="0.5"
+            value={selectedSize}
+            onChange={(e) => setSelectedSize(parseFloat(e.target.value))}
+            className="w-full mt-2"
+          />
+          <p>Selected Size: <strong>{selectedSize}</strong></p>
+
+          <h5>{t('BodyType')}</h5>
+          <p>
+            {selectedBodyType 
+              ? <span>You selected: <strong>{selectedBodyType}</strong></span>
+              : t('bodytype description')}
+          </p>
+
+          <div className="flex flex-col gap-4">
+            <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
+
+            <button
+              onClick={() => setSelectedSize(6)}
+              className="w-28 px-4 py-2 bg-gray-400 text-white rounded"
+            >
+              Reset
+            </button>
+          </div>
+
+          {/* Show only measurements required by the current pattern */}
+          {Object.keys(relevantMeasurements).length > 0 && (
+            <div className="mt-4 p-2 bg-gray-100 border rounded">
+              <p><strong>Current Body Measurements:</strong></p>
+              {Object.entries(relevantMeasurements).map(([key, value]) => (
+                 <p 
+                 key={key} 
+                 data-measurement={key}
+                 className="hover:text-blue-500 cursor-pointer"
+                 onMouseEnter={() => {
+                  setHoveredMeasurement(key);
+                  setHoveredDescription(measurementDescriptions[key] || "No description available.");
+                }}
+                onMouseLeave={() => {
+                  setHoveredMeasurement(null);
+                  setHoveredDescription("");
+                }}
+               >
+                 {key}: {convertMeasurement(value)}
+               </p>
+              ))}
+            </div>
+          )}
+
+          {/* Next button */}
+          <div className="mt-4">
+            <button
+              onClick={handleNext}
+              disabled={!adjustedMeasurements}
+              className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            >
+              {t('Go to Pattern Editor')}
+            </button>
+          </div>
+        </Fragment>
       </div>
 
-      <Fragment>
-        <h5>{t('Choose Your Size')}</h5>
-        <SizeChartPicker selectSize={setSelectedSize} selectedSize={selectedSize} />
-
-        {/* Size Adjustment Slider */}
-        <h5>Fine Tune Your Size</h5>
-        <input
-          type="range"
-          min="0"
-          max="16"
-          step="0.5"
-          value={selectedSize}
-          onChange={(e) => setSelectedSize(parseFloat(e.target.value))}
-          className="w-full mt-2"
-        />
-        <p>Selected Size: <strong>{selectedSize}</strong></p>
-
-        <h5>{t('BodyType')}</h5>
-        <p>
-          {selectedBodyType 
-            ? <span>You selected: <strong>{selectedBodyType}</strong></span>
-            : t('bodytype description')}
-        </p>
-
-        <div className="flex flex-col gap-4">
-          <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
-
-          <button
-            onClick={() => setSelectedSize(6)}
-            className="w-28 px-4 py-2 bg-gray-400 text-white rounded"
-          >
-            Reset
-          </button>
+      {/* RIGHT SIDE: Avatar SVG */}
+      <div className="w-1/2 flex justify-center items-center relative">
+        <object 
+          id="avatar-svg" 
+          type="image/svg+xml" 
+          data="/img/avatar.svg" 
+          className="w-[500px] h-auto translate-y-[-20px]"
+        ></object>
+        
+        <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 text-center bg-white text-gray-700 text-lg p-4 rounded shadow-md w-[min(90%,500px)] max-w-full break-words">
+          {hoveredDescription}
         </div>
-
-        {/* Show only measurements required by the current pattern */}
-        {Object.keys(relevantMeasurements).length > 0 && (
-          <div className="mt-4 p-2 bg-gray-100 border rounded">
-            <p><strong>Current Body Measurements (cm):</strong></p>
-            {Object.entries(relevantMeasurements).map(([key, value]) => (
-              <p 
-                key={key} 
-                data-measurement={key} // This will help link it to the SVG later
-                className="hover:text-blue-500 cursor-pointer" // Temporary hover effect
-              >
-                {key}: {convertMeasurement(value)}
-              </p>
-            ))}
-          </div>
-        )}
-
-        {/* Next button */}
-        <div className="mt-4">
-          <button
-            onClick={handleNext}
-            disabled={!adjustedMeasurements}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          >
-            {t('Go to Pattern Editor')}
-          </button>
-        </div>
-      </Fragment>
+    </div>
     </div>
   );
+
 };

@@ -1,0 +1,16 @@
+{
+    "waist": "waist measurement description waist measurement description waist measurement description waist measurement description waist measurement description waist measurement description waist measurement description waist measurement description",
+    "seat": "seat measurement description",
+    "waistToSeat": "waist to Seat desc",
+    "waistToHips": "waisttoHips desc",
+    "waistToKnee": "waist to Knee desc",
+    "waistToArmpit": "waist to armpit desc",
+    "hips": "hip desc",
+    "shoulderSlope": "shoulder slop desc",
+    "shoulderToShoulder": "shoulder to shoulder desc",
+    "neck": "neck desc",
+    "hpsToWaistBack": "hps to waistback desc",
+    "hpsToBust": "hps to bust desc",
+    "chest": "chest desc",
+    "biceps": "biceps desc"
+}
