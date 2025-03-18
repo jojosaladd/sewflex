@@ -57,7 +57,12 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   const [adjustedMeasurements, setAdjustedMeasurements] = useState(null);
   const [hoveredMeasurement, setHoveredMeasurement] = useState(null); // Track hover state
   const [hoveredDescription, setHoveredDescription] = useState(""); 
+  const [editingMeasurement, setEditingMeasurement] = useState(null);
+  const [editedValue, setEditedValue] = useState("");
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isCustom, setIsCustom] = useState(false);
 
+  
   // Get the list of measurements required for the current pattern
   const requiredMeasurements = Design?.patternConfig?.measurements || [];
 
@@ -66,6 +71,62 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
     const newUnit = settings.units === 'imperial' ? 'metric' : 'imperial';
     update.settings(['units'], newUnit);
   };
+
+  const toggleEditMode = () => {
+    setIsEditMode(!isEditMode);
+    if (!isEditMode) setEditingMeasurement(null);
+  };
+
+  const revertMeasurement = (value) => {
+    return settings.units === 'imperial' ? value * 25.4 : value * 10;
+  };
+  
+  const handleDoubleClick = (key, value) => {
+    if (!isEditMode) return;
+    setEditingMeasurement(key);
+    setEditedValue(convertMeasurement(value)); 
+  };
+
+  const handleChange = (e) => {
+    setEditedValue(e.target.value);
+  };
+
+  const handleBlur = (key) => {
+    if (editedValue.trim() !== "" && !isNaN(editedValue)) {
+      const convertedValue = revertMeasurement(editedValue);
+  
+      // Update state directly so React knows to re-render
+      setAdjustedMeasurements((prev) => ({
+        ...prev,
+        [key]: parseFloat(convertedValue),
+      }));
+  
+      // Also update global settings if needed
+      update.settings(['measurements', key], parseFloat(convertedValue));
+      setIsCustom(true);
+    }
+    setEditingMeasurement(null);
+  };
+  
+  
+  const handleKeyDown = (e, key) => {
+    if (e.key === "Enter") {
+      handleBlur(key);
+    }
+  };
+
+  useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (!e.target.closest(".measurement-input")) {
+      setEditingMeasurement(null);
+    }
+  };
+
+  document.addEventListener("click", handleClickOutside);
+  return () => {
+    document.removeEventListener("click", handleClickOutside);
+  };
+}, []);
 
   // Convert measurements based on unit system
   const convertMeasurement = (value) => {
@@ -196,6 +257,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
           </button>
         </div>
 
+      
         <Fragment>
           <h5>{t('Choose Your Size')}</h5>
           <SizeChartPicker selectSize={setSelectedSize} selectedSize={selectedSize} />
@@ -211,7 +273,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
             onChange={(e) => setSelectedSize(parseFloat(e.target.value))}
             className="w-full mt-2"
           />
-          <p>Selected Size: <strong>{selectedSize}</strong></p>
+          <p>Selected Size: <strong>{isCustom ? 'Custom' : selectedSize}</strong></p>
 
           <h5>{t('BodyType')}</h5>
           <p>
@@ -235,6 +297,15 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
           {Object.keys(relevantMeasurements).length > 0 && (
             <div className="mt-4 p-2 bg-gray-100 border rounded">
               <p><strong>Current Body Measurements:</strong></p>
+              <div className="flex justify-start mb-4">
+                <button
+                  onClick={toggleEditMode}
+                  className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-focus transition"
+                >
+                  {isEditMode ? "Exit Edit Mode" : "Enable Edit Mode"}
+                </button>
+            </div>
+
               {Object.entries(relevantMeasurements).map(([key, value]) => (
                  <p 
                  key={key} 
@@ -248,9 +319,23 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
                   setHoveredMeasurement(null);
                   setHoveredDescription("");
                 }}
+                onDoubleClick={() => handleDoubleClick(key, value)} 
                >
-                 {key}: {convertMeasurement(value)}
-               </p>
+                  <strong>{key}: </strong>
+                  {editingMeasurement === key ? (
+                    <input
+                      type="text"
+                      value={editedValue}
+                      onChange={handleChange}
+                      onBlur={() => handleBlur(key)}
+                      onKeyDown={(e) => handleKeyDown(e, key)}
+                      className="border border-gray-400 px-1 rounded"
+                      autoFocus
+                    />
+                  ) : (
+                    convertMeasurement(value)
+                  )}
+                </p>
               ))}
             </div>
           )}
