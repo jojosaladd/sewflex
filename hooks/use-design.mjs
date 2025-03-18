@@ -10,9 +10,9 @@ import { Teagan } from 'site/design/teagan/src/index.mjs'
 // import { Penelope } from '@freesewing/penelope';
 
 const designs = {
-  fromscratch: FromScratch,
+  // fromscratch: FromScratch,
   penelope: Penelope,
-  frombrian: Teagan,
+  teagan: Teagan,
   // frombent: FromBent,
   // fromtitan: FromTitan,
   // frombella: FromBella

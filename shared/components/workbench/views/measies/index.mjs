@@ -260,7 +260,13 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
       
         <Fragment>
           <h5>{t('Choose Your Size')}</h5>
-          <SizeChartPicker selectSize={setSelectedSize} selectedSize={selectedSize} />
+          <SizeChartPicker 
+            selectSize={(size) => {
+              setSelectedSize(size);
+              setIsCustom(false);
+            }} 
+            selectedSize={selectedSize} 
+          />
 
           {/* Size Adjustment Slider */}
           <h5>Fine Tune Your Size</h5>
@@ -270,7 +276,10 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
             max="16"
             step="0.5"
             value={selectedSize}
-            onChange={(e) => setSelectedSize(parseFloat(e.target.value))}
+            onChange={(e) => {
+              setSelectedSize(parseFloat(e.target.value));
+              setIsCustom(false);
+            }}
             className="w-full mt-2"
           />
           <p>Selected Size: <strong>{isCustom ? 'Custom' : selectedSize}</strong></p>
@@ -354,18 +363,21 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
       </div>
 
       {/* RIGHT SIDE: Avatar SVG */}
-      <div className="w-1/2 flex justify-center items-center relative">
+      <div className="w-1/2 flex flex-col items-center relative">
+        {/* Avatar */}
         <object 
           id="avatar-svg" 
           type="image/svg+xml" 
           data="/img/avatar.svg" 
-          className="w-[500px] h-auto translate-y-[-20px]"
+          className="w-[500px] h-auto"
         ></object>
-        
-        <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 text-center bg-white text-gray-700 text-lg p-4 rounded shadow-md w-[min(90%,500px)] max-w-full break-words">
-          {hoveredDescription}
-        </div>
-    </div>
+          {/* Hovered Description Text on top */}
+          {hoveredDescription && (
+          <div className="mb-4 text-center bg-white text-gray-700 text-lg p-4 rounded shadow-md w-[min(90%,500px)] max-w-full break-words">
+            {hoveredDescription}
+          </div>
+        )}
+      </div>
     </div>
   );
 

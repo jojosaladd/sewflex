@@ -15,25 +15,17 @@ export const ModalDesignPicker = () => {
       <div className="max-w-xl">
         <h2>{t('Choose Your Design')}</h2>
         <div className="flex flex-row p-4 w-full flex-wrap gap-2">
-          {collection.map((d) => (
-            <Link
-              href={`/design/${d}`}
-              key={d}
-              className={`btn w-64 btn-secondary flex flex-col flex-nowrap items-start
-              gap-2 py-2 h-auto border border-secondary justify-start text-left bg-opacity-30
-              hover:bg-opacity-20 hover:bg-secondary btn-ghost
-              border border-secondary hover:border hover:border-secondary
-                `}
-            >
-                {/* Image Placeholder */}
-                <div className="w-full h-40 bg-pink-500 rounded-md flex items-center justify-center">
-                <span className="text-white text-sm font-bold">Placeholder</span>
-              </div>
-
-              <div className="text-lg font-bold">{t(`sde:${d}.t`)}</div>
-              <div className={`normal-case text-base-content`}>{t(`sde:${d}.d`)}</div>
-            </Link>
-          ))}
+        {collection.map((d) => (
+  <Link href={`/design/${d}`} key={d} className="...">
+    <img
+      src={`/img/${d}.png`}
+      alt={`${d} preview`}
+      className="w-full h-40 object-cover rounded-md"
+    />
+    <div className="text-lg font-bold">{t(`sde:${d}.t`)}</div>
+    <div className="normal-case text-base-content">{t(`sde:${d}.d`)}</div>
+  </Link>
+))}
         </div>
       </div>
     </ModalWrapper>
