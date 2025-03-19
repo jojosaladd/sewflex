@@ -84,7 +84,8 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   const handleDoubleClick = (key, value) => {
     if (!isEditMode) return;
     setEditingMeasurement(key);
-    setEditedValue(convertMeasurement(value)); 
+    setEditedValue(convertMeasurement(value).toString());  // PRE-FILL with current value
+
   };
 
   const handleChange = (e) => {
@@ -326,35 +327,44 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
           </div>
   
           {Object.entries(relevantMeasurements).map(([key, value]) => (
-            <p 
-              key={key} 
-              data-measurement={key}
-              className="hover:text-blue-500 cursor-pointer"
-              onMouseEnter={() => {
-                setHoveredMeasurement(key);
-                setHoveredDescription(measurementDescriptions[key] || "No description available.");
-              }}
-              onMouseLeave={() => {
-                setHoveredMeasurement(null);
-                setHoveredDescription("");
-              }}
-              onDoubleClick={() => handleDoubleClick(key, value)} 
-            >
-              <strong>{key}: </strong>
-              {editingMeasurement === key ? (
-                <input
-                  type="text"
-                  value={editedValue}
-                  onChange={handleChange}
-                  onBlur={() => handleBlur(key)}
-                  onKeyDown={(e) => handleKeyDown(e, key)}
-                  className="border border-gray-400 px-1 rounded"
-                  autoFocus
-                />
-              ) : (
-                convertMeasurement(value)
-              )}
-            </p>
+            <p
+            key={key}
+            data-measurement={key}
+            className="hover:text-blue-500 cursor-pointer"
+            onMouseEnter={() => {
+              setHoveredMeasurement(key);
+              setHoveredDescription(measurementDescriptions[key] || "No description available.");
+            }}
+            onMouseLeave={() => {
+              setHoveredMeasurement(null);
+              setHoveredDescription("");
+            }}
+          >
+            <strong>{key}: </strong>
+          
+            {editingMeasurement === key ? (
+              <input
+                type="text"
+                value={editedValue}
+                onChange={handleChange}
+                onBlur={() => handleBlur(key)}
+                onKeyDown={(e) => handleKeyDown(e, key)}
+                className="border border-gray-400 px-1 rounded"
+                autoFocus
+                onFocus={(e) => e.target.select()}  // This selects all text for easier overwriting
+
+              />
+            ) : (
+              <span 
+                onDoubleClick={(e) => {
+                  e.stopPropagation(); // STOP bubbling, super important
+                  handleDoubleClick(key, value);
+                }}
+              >
+                {convertMeasurement(value)}
+              </span>
+            )}
+          </p>
           ))}
         </div>
       )}
