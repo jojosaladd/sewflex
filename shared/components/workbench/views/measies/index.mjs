@@ -242,12 +242,12 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   };
 
   return (
-    <div className="max-w-7xl mt-8 mx-auto px-4 flex">
-      {/* LEFT SIDE: Measurement selection */}
-      <div className="w-1/2 pr-8">
+    <div className="max-w-7xl mt-8 mx-auto px-4 grid grid-cols-3 gap-8">
+  
+      {/* LEFT COLUMN: Measurement selection */}
+      <div className="pr-4">
         <h2>{t('account:measurements')}</h2>
-
-        {/* Unit System Toggle Button */}
+  
         <div className="flex justify-end mb-4">
           <button
             onClick={toggleUnits}
@@ -256,8 +256,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
             {settings.units === 'imperial' ? "Switch to Metric (cm)" : "Switch to Imperial (inches)"}
           </button>
         </div>
-
-      
+  
         <Fragment>
           <h5>{t('Choose Your Size')}</h5>
           <SizeChartPicker 
@@ -267,8 +266,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
             }} 
             selectedSize={selectedSize} 
           />
-
-          {/* Size Adjustment Slider */}
+  
           <h5>Fine Tune Your Size</h5>
           <input
             type="range"
@@ -283,17 +281,17 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
             className="w-full mt-2"
           />
           <p>Selected Size: <strong>{isCustom ? 'Custom' : selectedSize}</strong></p>
-
+  
           <h5>{t('BodyType')}</h5>
           <p>
             {selectedBodyType 
               ? <span>You selected: <strong>{selectedBodyType}</strong></span>
               : t('bodytype description')}
           </p>
-
+  
           <div className="flex flex-col gap-4">
             <BodyTypePicker selectBodyType={setSelectedBodyType} selectedBodyType={selectedBodyType} />
-
+  
             <button
               onClick={() => setSelectedSize(6)}
               className="w-28 px-4 py-2 bg-gray-400 text-white rounded"
@@ -301,55 +299,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
               Reset
             </button>
           </div>
-
-          {/* Show only measurements required by the current pattern */}
-          {Object.keys(relevantMeasurements).length > 0 && (
-            <div className="mt-4 p-2 bg-gray-100 border rounded">
-              <p><strong>Current Body Measurements:</strong></p>
-              <div className="flex justify-start mb-4">
-                <button
-                  onClick={toggleEditMode}
-                  className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-focus transition"
-                >
-                  {isEditMode ? "Exit Edit Mode" : "Enable Edit Mode"}
-                </button>
-            </div>
-
-              {Object.entries(relevantMeasurements).map(([key, value]) => (
-                 <p 
-                 key={key} 
-                 data-measurement={key}
-                 className="hover:text-blue-500 cursor-pointer"
-                 onMouseEnter={() => {
-                  setHoveredMeasurement(key);
-                  setHoveredDescription(measurementDescriptions[key] || "No description available.");
-                }}
-                onMouseLeave={() => {
-                  setHoveredMeasurement(null);
-                  setHoveredDescription("");
-                }}
-                onDoubleClick={() => handleDoubleClick(key, value)} 
-               >
-                  <strong>{key}: </strong>
-                  {editingMeasurement === key ? (
-                    <input
-                      type="text"
-                      value={editedValue}
-                      onChange={handleChange}
-                      onBlur={() => handleBlur(key)}
-                      onKeyDown={(e) => handleKeyDown(e, key)}
-                      className="border border-gray-400 px-1 rounded"
-                      autoFocus
-                    />
-                  ) : (
-                    convertMeasurement(value)
-                  )}
-                </p>
-              ))}
-            </div>
-          )}
-
-          {/* Next button */}
+  
           <div className="mt-4">
             <button
               onClick={handleNext}
@@ -361,24 +311,72 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
           </div>
         </Fragment>
       </div>
-
-      {/* RIGHT SIDE: Avatar SVG */}
-      <div className="w-1/2 flex flex-col items-center relative">
-        {/* Avatar */}
+  
+      {/* MIDDLE COLUMN: Measurements */}
+      {Object.keys(relevantMeasurements).length > 0 && (
+        <div className="p-4 bg-gray-100 border rounded overflow-auto">
+          <p><strong>Current Body Measurements:</strong></p>
+          <div className="flex justify-start mb-4">
+            <button
+              onClick={toggleEditMode}
+              className="px-4 py-2 bg-accent text-white rounded hover:bg-accent-focus transition"
+            >
+              {isEditMode ? "Exit Edit Mode" : "Enable Edit Mode"}
+            </button>
+          </div>
+  
+          {Object.entries(relevantMeasurements).map(([key, value]) => (
+            <p 
+              key={key} 
+              data-measurement={key}
+              className="hover:text-blue-500 cursor-pointer"
+              onMouseEnter={() => {
+                setHoveredMeasurement(key);
+                setHoveredDescription(measurementDescriptions[key] || "No description available.");
+              }}
+              onMouseLeave={() => {
+                setHoveredMeasurement(null);
+                setHoveredDescription("");
+              }}
+              onDoubleClick={() => handleDoubleClick(key, value)} 
+            >
+              <strong>{key}: </strong>
+              {editingMeasurement === key ? (
+                <input
+                  type="text"
+                  value={editedValue}
+                  onChange={handleChange}
+                  onBlur={() => handleBlur(key)}
+                  onKeyDown={(e) => handleKeyDown(e, key)}
+                  className="border border-gray-400 px-1 rounded"
+                  autoFocus
+                />
+              ) : (
+                convertMeasurement(value)
+              )}
+            </p>
+          ))}
+        </div>
+      )}
+  
+      {/* RIGHT COLUMN: Avatar */}
+      <div className="flex flex-col items-center relative overflow-hidden shrink-0">
         <object 
           id="avatar-svg" 
           type="image/svg+xml" 
           data="/img/avatar.svg" 
-          className="w-[500px] h-auto"
+          className="max-w-[300px] md:max-w-[400px] lg:max-w-[500px] w-full h-auto"
         ></object>
-          {/* Hovered Description Text on top */}
-          {hoveredDescription && (
-          <div className="mb-4 text-center bg-white text-gray-700 text-lg p-4 rounded shadow-md w-[min(90%,500px)] max-w-full break-words">
+  
+        {hoveredDescription && (
+          <div className="mt-4 text-center bg-white text-gray-700 text-lg p-4 rounded shadow-md w-[min(90%,500px)] max-w-full break-words">
             {hoveredDescription}
           </div>
         )}
       </div>
+  
     </div>
   );
+  
 
 };
