@@ -165,18 +165,38 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
     if (newMeasurements) {
       let adjusted = { ...newMeasurements };
 
-      // Apply Petite adjustments UPDATE LATER! 
-      // if (selectedBodyType === 'Petite') {
-      //   adjusted.chest -= 500;
-      //   adjusted.waist -= 500;
-      // }
+      if (selectedBodyType === 'Petite') {
+        adjusted.waist += 12.7;
+        adjusted.waistToSeat -= 12.7;
+        adjusted.waistToHips -= 3;
+        adjusted.waistToKnee -= 22.2;
+        adjusted.waistToArmpit -= 9.5;
+        adjusted.shoulderSlope -= 5;
+        adjusted.shoulderToShoulder -= 12.7;
+        adjusted.hpsToWaistBack -= 19;
+        adjusted.hpsToBust -= 6.4;
+      }
+
+      if (selectedBodyType === 'Petite-Curvy') {
+        adjusted.waist -= 25.4;
+        adjusted.seat += 19.05;
+        adjusted.waistToSeat -= 12.7;
+        adjusted.waistToHips -= 3;
+        adjusted.waistToKnee -= 22.2;
+        adjusted.waistToArmpit -= 9.5;
+        adjusted.hips -= 6.35;
+        adjusted.shoulderSlope -= 5;
+        adjusted.shoulderToShoulder -= 12.7;
+        adjusted.hpsToWaistBack -= 19;
+        adjusted.hpsToBust -= 6.4;
+      }
 
       if (selectedBodyType === 'Standard-Curvy') {
         adjusted.waist -= 38.1;
         adjusted.seat += 19.05;
-        adjusted.waistToSeat += 3.18;
-        adjusted.waistToHips += 0;
-        adjusted.waistToKnee += 0;
+        adjusted.waistToSeat += 3.20;
+        adjusted.waistToHips += 3.20;
+        adjusted.waistToKnee += 3.20;
         adjusted.waistToArmpit += 0;
         adjusted.hips -= 6.35;
         adjusted.shoulderSlope += 0;
