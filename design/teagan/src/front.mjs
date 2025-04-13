@@ -173,11 +173,11 @@ function teaganFront({
   })
 
   // Title
-  points.title = new Point(points.waist.x / 2, points.waist.y)
-  macro('title', { at: points.title, nr: 1, title: 'front' })
+ points.title = new Point(points.waist.x / 2, points.waist.y)
+ macro('title', { at: points.title, nr: 1, title: 'front' })
 
   // Logo
-  points.logo = points.title.shift(-90, 75)
+  //points.logo = points.title.shift(-90, 75)
   // snippets.logo = new Snippet('logo', points.logo)
 
   // Dimensions
@@ -244,7 +244,7 @@ function teaganFront({
     to: points.cfNeck,
     x: points.cfHem.x - sa - 15,
   })
-
+  delete snippets.logo
   return part
 }
 
@@ -279,5 +279,6 @@ export const front = {
     necklineWidth: { pct: 30, min: 10, max: 50, menu: 'style' },
     necklineBend: { pct: 30, min: 0, max: 70, menu: 'style' },
   },
+
   draft: teaganFront,
 }

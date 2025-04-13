@@ -8,7 +8,7 @@ export const Breadcrumbs = ({ crumbs, title }) => {
   return (
     <ul className="flex flex-row flex-wrap">
       <li className="inline">
-        <Link href="/" title="FreeSewing">
+        <Link href="/" title="SewFlex">
           <HomeIcon />
         </Link>
       </li>
