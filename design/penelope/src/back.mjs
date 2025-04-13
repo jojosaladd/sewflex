@@ -59,7 +59,7 @@ export const back = {
       to: points.grainlineBottom,
     })
 
-    snippets.logo = new Snippet('logo', points.logoAnchor)
+    //snippets.logo = new Snippet('logo', points.logoAnchor)
 
     store.cutlist.addCut({
       cut: options.backVent == false && options.zipperLocation != 'backSeam' ? 1 : 2,

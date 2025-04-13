@@ -178,7 +178,7 @@ function teaganFront({
 
   // Logo
   points.logo = points.title.shift(-90, 75)
-  snippets.logo = new Snippet('logo', points.logo)
+  // snippets.logo = new Snippet('logo', points.logo)
 
   // Dimensions
   macro('hd', {
