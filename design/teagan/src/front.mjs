@@ -82,10 +82,10 @@ function teaganFront({
   )
 
   // Log info for full length
-  store.flag.info({
-    msg: 'teagan:fullLengthFromHps',
-    replace: { length: units(points.hps.dy(points.hem)) },
-  })
+  // store.flag.info({
+  //   msg: 'teagan:fullLengthFromHps',
+  //   replace: { length: units(points.hps.dy(points.hem)) },
+  // })
 
   // Store length of neck opening for finish
   store.set(
@@ -265,8 +265,10 @@ export const front = {
     sleeveLength: { pct: 30, min: 20, max: 100, menu: 'fit' },
     lengthBonus: { pct: 15, min: -20, max: 60, menu: 'style' },
     backNeckCutout: { pct: 8, min: 4, max: 12, menu: 'fit' },
+    armholeDepth:{ pct: 12, min: 4, max: 30, menu: 'fit' },
+
     // Teagan specific
-    draftForHighBust: { bool: false, menu: 'fit' },
+    draftForHighBust: { bool: false},
     fitWaist: { bool: false, menu: 'fit' },
     waistEase: {
       pct: 25,
