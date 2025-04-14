@@ -1,4 +1,5 @@
 //  __SDEFILE__ - This file is a dependency for the stand-alone environment
+// pinkcandy --> easy to search
 import {
   DesignOptions,
   ns as designMenuNs,
@@ -17,7 +18,7 @@ import {
   FlagsAccordionEntries,
 } from 'shared/components/workbench/views/flags.mjs'
 import { collection } from 'site/hooks/use-design.mjs'
-
+import { AiAssistant } from '../../menus/ai-assistant/index.mjs'
 export const ns = nsMerge(coreMenuNs, designMenuNs, uiNs, collection)
 
 export const DraftMenu = ({
@@ -64,6 +65,12 @@ export const DraftMenu = ({
     //   icon: <DesktopIcon className="w-8 h-8" />,
     //   menu: <UiSettings {...menuProps} {...{ ui, view, setView }} />,
     // },
+    {
+      name: 'aiAssistant',
+      ns: 'ui-settings',
+      icon: <DesktopIcon className="w-8 h-8" />,
+      menu: <AiAssistant />,
+    }
   ]
 
   const items = []

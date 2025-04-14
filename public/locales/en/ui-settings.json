@@ -2,6 +2,8 @@
   "uiSettings.t": "UI Preferences",
   "uiSettings.d": "These preferences control the UI (User Interface) aspects of our online pattern drafting environment.",
   "renderer.t": "Render Engine",
+  "aiAssistant.t":"AI Assistant",
+  "aiAssistant.d": "The AI Assistant helps you navigate fit and design adjustments. If you’re not sure where to change things like the number of darts or skirt length, just describe what you want—and the assistant will guide you to the right option.",
   "renderer.d": "Controls how the pattern is rendered (drawn) on the screen",
   "renderWithReact.t": "Render with FreeSewing's React components",
   "renderWithReact.d": "Render as SVG through our React components. Allows interactivity and is optimized for screen. Use this if you are not sure what to pick.",
