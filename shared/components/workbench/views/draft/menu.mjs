@@ -52,12 +52,12 @@ export const DraftMenu = ({
       icon: <OptionsIcon className="w-8 h-8" />,
       menu: <DesignOptions {...menuProps} />,
     },
-    {
-      name: 'coreSettings',
-      ns: 'core-settings',
-      icon: <SettingsIcon className="w-8 h-8" />,
-      menu: <CoreSettings {...menuProps} />,
-    },
+    // {
+    //   name: 'coreSettings',
+    //   ns: 'core-settings',
+    //   icon: <SettingsIcon className="w-8 h-8" />,
+    //   menu: <CoreSettings {...menuProps} />,
+    // },
     // {
     //   name: 'uiSettings',
     //   ns: 'ui-settings',

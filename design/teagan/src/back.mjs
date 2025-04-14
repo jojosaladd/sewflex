@@ -70,19 +70,19 @@ function teaganBack({
   )
 
   // Let the user know how long the neck opening is
-  store.flag.info({
-    msg: 'teagan:neckOpeningLength',
-    replace: {
-      length: units(
-        store.get('lengthFrontNeckOpening') +
-          2 *
-            new Path()
-              .move(points.neck)
-              .curve(points.neckCp2, points.cbNeckCp1, points.cbNeck)
-              .length()
-      ),
-    },
-  })
+  // store.flag.info({
+  //   msg: 'teagan:neckOpeningLength',
+  //   replace: {
+  //     length: units(
+  //       store.get('lengthFrontNeckOpening') +
+  //         2 *
+  //           new Path()
+  //             .move(points.neck)
+  //             .curve(points.neckCp2, points.cbNeckCp1, points.cbNeck)
+  //             .length()
+  //     ),
+  //   },
+  // })
 
   /*
    * Annotations

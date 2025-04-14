@@ -231,12 +231,13 @@ export const optionsMenuStructure = (options, settings) => {
     }
   }
 
-  // Always put advanced at the end
-  if (menu.advanced) {
-    const adv = menu.advanced
-    delete menu.advanced
-    menu.advanced = adv
-  }
+  // // Always put advanced at the end
+  // if (menu.advanced) {
+  //   const adv = menu.advanced
+  //   delete menu.advanced
+  //   menu.advanced = adv
+  // }
+  delete menu.advanced
 
   return menu
 }

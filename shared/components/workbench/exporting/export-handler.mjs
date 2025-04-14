@@ -16,7 +16,7 @@ import get from 'lodash.get'
 
 export const ns = ['cut', 'plugin', 'common']
 export const exportTypes = {
-  exportForPrinting: ['a4', 'a3', 'a2', 'a1', 'a0', 'letter', 'legal', 'tabloid'],
+  exportForPrinting: ['a4', 'a0', 'letter'],
   exportForEditing: ['svg', 'pdf'],
   exportAsData: ['json', 'yaml'],
 }
@@ -177,7 +177,7 @@ export const handleExport = async ({
         // add the strings that are used on the cover page
         workerArgs.strings = {
           design: capitalize(design),
-          tagline: t('common:slogan1') + '. ' + t('common:slogan2'),
+          tagline: t(''),
           url: window.location.href,
           cuttingLayout: t('cut:cuttingLayout'),
         }

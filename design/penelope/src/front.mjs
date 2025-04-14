@@ -35,7 +35,7 @@ export const front = {
     points.scaleBox = points.logoAnchor.shift(270, 100)
     macro('scalebox', { at: points.scaleBox })
 
-    snippets.logo = new Snippet('logo', points.logoAnchor)
+    // snippets.logo = new Snippet('logo', points.logoAnchor)
 
     store.cutlist.addCut({ cut: 1, from: 'fabric' })
 

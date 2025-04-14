@@ -97,7 +97,7 @@ export const waistband = {
       reverse: true,
     })
 
-    snippets.logo = new Snippet('logo', points.logoAnchor)
+    // snippets.logo = new Snippet('logo', points.logoAnchor)
 
     store.cutlist.addCut({ cut: 1, from: 'fabric' })
 
