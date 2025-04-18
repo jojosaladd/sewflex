@@ -8,7 +8,7 @@ export const waistband = {
   measurements: ['waist', 'waistToKnee'],
   options: {
     waistEase,
-    waistband: { bool: true, menu: 'style' },
+    waistband: { bool: true, menu: false },
     waistbandWidth: {
       pct: 10,
       min: 5,
@@ -23,7 +23,7 @@ export const waistband = {
       max: 10,
       ...pctBasedOn('waist'),
       // eslint-disable-next-line no-unused-vars
-      menu: (settings, mergedOptions) => (settings?.options?.waistband === false ? false : 'style'),
+      menu: false,
     },
   },
   draft: ({

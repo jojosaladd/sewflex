@@ -23,11 +23,11 @@ export const options = {
   curvedDartControlAngle: 2,
   curvedDartTopControlOffset: 0.2,
   curvedDartBottomControlOffset: 0.4,
-  curvedDarts: { bool: true, menu: 'style' },
-  lengthBonus: { pct: 0, min: -50, max: 50, ...pctBasedOn('waistToKnee'), menu: 'style' },
-  hemBonus: { pct: 0, min: -35, max: 0, ...pctBasedOn('seat'), menu: 'style' },
-  hem: { pct: 2, min: 0, max: 5, ...pctBasedOn('waistToKnee'), menu: 'style' },
-  backVent: { bool: false, menu: 'style' },
+  curvedDarts: { bool: true, menu: false},
+  lengthBonus: { pct: 0, min: -50, max: 50, ...pctBasedOn('waistToKnee'), menu: 'fit' },
+  hemBonus: { pct: 0, min: -35, max: 35, ...pctBasedOn('seat'), menu: 'style' },
+  hem: { pct: 2, min: 0, max: 5, ...pctBasedOn('waistToKnee'), menu: false },
+  backVent: { bool: false, menu: false },
   backVentLength: {
     pct: 40,
     min: 5,
@@ -36,9 +36,9 @@ export const options = {
     toAbs: (value, { measurements, options }, mergedOptions) =>
       value * (measurements.waistToKnee * (1 + mergedOptions.lengthBonus)),
     // eslint-disable-next-line no-unused-vars
-    menu: (settings, mergedOptions) => (settings?.options?.backVent === false ? false : 'style'),
+    menu: false,
   },
-  zipperLocation: { dflt: 'backSeam', list: ['backSeam', 'sideSeam'], menu: 'style' },
+  zipperLocation: { dflt: 'backSeam', list: ['backSeam', 'sideSeam'], menu: false },
   nrOfDarts: { count: 2, min: 1, max: 2, menu: 'style' },
   seatEase: { pct: 1, min: 0, max: 8, ...pctBasedOn('seat'), menu: 'fit' },
   waistEase: { pct: 1, min: 0, max: 8, ...pctBasedOn('waist'), menu: 'fit' },
