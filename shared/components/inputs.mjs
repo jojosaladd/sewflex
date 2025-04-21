@@ -1,4 +1,5 @@
 //  __SDEFILE__ - This file is a dependency for the stand-alone environment
+// this file was used to get rid of Docsicon that was causing problem
 // Dependencies
 import { cloudflareImageUrl } from 'shared/utils.mjs'
 import { collection } from 'site/hooks/use-design.mjs'
@@ -56,7 +57,7 @@ export const FormControl = ({
   const topLabelChildren = (
     <>
       <span className="label-text text-lg font-bold mb-0 text-inherit">{label}</span>
-      {docs ? (
+      {false &&  docs ? (
         <span className="label-text-alt">
           <button
             className="btn btn-ghost btn-sm btn-circle hover:btn-secondary"

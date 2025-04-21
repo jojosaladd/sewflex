@@ -1,5 +1,6 @@
 import { base } from '@freesewing/brian'
 import { hidePresets } from '@freesewing/core'
+import { toAbs, pctBasedOn } from '@freesewing/core'
 
 function teaganFront({
   utils,
@@ -29,7 +30,7 @@ function teaganFront({
     lowerWidth = (measurements.hips * (1 + options.hipsEase)) / 4
     points.hem.x = lowerWidth
     points.hips.x = lowerWidth
-    points.waist.x = midWidth
+    points.waist.x = midWidth 
 
     // control points should be somewhat evenly spaced around waist
     let cpAbove, cpBelow
@@ -81,7 +82,7 @@ function teaganFront({
     points.armholePitch.x
   )
 
-  // Log info for full length
+  // // Log info for full length
   // store.flag.info({
   //   msg: 'teagan:fullLengthFromHps',
   //   replace: { length: units(points.hps.dy(points.hem)) },
@@ -263,13 +264,13 @@ export const front = {
     // Brian overrides
     chestEase: { pct: 12, min: 5, max: 25, menu: 'fit' },
     sleeveLength: { pct: 30, min: 20, max: 100, menu: 'fit' },
-    lengthBonus: { pct: 15, min: -20, max: 60, menu: 'style' },
+    lengthBonus: { pct: 15, min: -20, max: 100, menu: 'style' },
     backNeckCutout: { pct: 8, min: 4, max: 12, menu: 'fit' },
     armholeDepth:{ pct: 12, min: 4, max: 30, menu: 'fit' },
 
     // Teagan specific
     draftForHighBust: { bool: false},
-    fitWaist: { bool: false, menu: 'fit' },
+    fitWaist: { bool: false, menu: 'style' },
     waistEase: {
       pct: 25,
       min: 8,
@@ -281,6 +282,5 @@ export const front = {
     necklineWidth: { pct: 30, min: 10, max: 50, menu: 'style' },
     necklineBend: { pct: 30, min: 0, max: 70, menu: 'style' },
   },
-
   draft: teaganFront,
 }

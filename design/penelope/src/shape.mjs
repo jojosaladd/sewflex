@@ -26,7 +26,7 @@ export const options = {
   curvedDarts: { bool: true, menu: false},
   lengthBonus: { pct: 0, min: -50, max: 50, ...pctBasedOn('waistToKnee'), menu: 'fit' },
   hemBonus: { pct: 0, min: -35, max: 35, ...pctBasedOn('seat'), menu: 'style' },
-  hem: { pct: 2, min: 0, max: 5, ...pctBasedOn('waistToKnee'), menu: false },
+  hem: { pct: 0, min: 0, max: 5, ...pctBasedOn('waistToKnee'), menu: false },
   backVent: { bool: false, menu: false },
   backVentLength: {
     pct: 40,
@@ -39,7 +39,7 @@ export const options = {
     menu: false,
   },
   zipperLocation: { dflt: 'backSeam', list: ['backSeam', 'sideSeam'], menu: false },
-  nrOfDarts: { count: 2, min: 1, max: 2, menu: 'style' },
+  nrOfDarts: { count: 2, min: 1, max: 2,   label: "number of darts", menu: 'style' },
   seatEase: { pct: 1, min: 0, max: 8, ...pctBasedOn('seat'), menu: 'fit' },
   waistEase: { pct: 1, min: 0, max: 8, ...pctBasedOn('waist'), menu: 'fit' },
   backDartDepthFactor: {
