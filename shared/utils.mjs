@@ -221,7 +221,10 @@ export const optionsMenuStructure = (options, settings) => {
           }
         }
         set(menu, `${option.menu}.isGroup`, true)
-        set(menu, `${option.menu}.${option.name}`, option)
+        set(menu, `${option.menu}.${option.name}`, Object.assign(Object.create(null), option, {
+          __label: option.label || option.name
+        }))
+        
      
       } else if (typeof option.menu === 'undefined') {
         console.log(

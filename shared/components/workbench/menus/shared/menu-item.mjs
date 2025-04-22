@@ -131,7 +131,8 @@ export const MenuItem = ({
 
   return (
     <FormControl
-      label={<span className="text-base font-normal">{t([`${name}.d`, name])}</span>}
+      label={<span className="text-base font-normal">{config.__label || name}</span>}
+
       id={config.name}
       labelBR={<div className="flex flex-row items-center gap-2">{buttons}</div>}
       labelBL={
@@ -218,7 +219,9 @@ export const MenuItemGroup = ({
       <div className="flex flex-row items-center justify-between w-full" key="a">
         <div className="flex flex-row items-center gap-4 w-full">
           <ItemIcon />
-          <span className="font-medium">{t([`${itemName}.t`, `workbench:${itemName}`])}</span>
+            <span className="font-medium">
+    {item.label || t([`${itemName}.t`, `workbench:${itemName}`])}
+  </span>
         </div>
         <div className="font-bold">
           <Value

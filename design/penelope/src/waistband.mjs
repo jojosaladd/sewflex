@@ -15,6 +15,7 @@ export const waistband = {
       max: 20,
       ...pctBasedOn('waistToKnee'),
       // eslint-disable-next-line no-unused-vars
+      label: "Waistband Width", 
       menu: (settings, mergedOptions) => (settings?.options?.waistband === false ? false : 'style'),
     },
     waistbandOverlap: {
