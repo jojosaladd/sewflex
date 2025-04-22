@@ -88,6 +88,7 @@ function teaganFront({
   //   replace: { length: units(points.hps.dy(points.hem)) },
   // })
 
+  
   // Store length of neck opening for finish
   store.set(
     'lengthFrontNeckOpening',
@@ -275,6 +276,7 @@ export const front = {
       pct: 25,
       min: 8,
       max: 40,
+      label: "Waist Girth",
       menu: (settings, mergedOptions) => (mergedOptions.fitWaist ? 'fit' : false),
     },
     hipsEase: { pct: 18, min: 8, max: 30, label:"Hip Girth", menu: 'fit' },
