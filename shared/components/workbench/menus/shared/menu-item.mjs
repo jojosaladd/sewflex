@@ -138,7 +138,14 @@ export const MenuItem = ({
       labelBL={
         <span
           className={`text-base font-medium -mt-2 block ${changed ? 'text-accent' : 'opacity-50'}`}
-        >
+          
+        >        
+          {config.special && (
+            <span className="block text-sm font-normal opacity-70 leading-tight -mt-1">
+              {config.special}
+            </span>
+          )}
+          
           {t(`workbench:youUse${changed ? 'Default' : 'Custom'}Value`)}
         </span>
       }
@@ -220,8 +227,8 @@ export const MenuItemGroup = ({
         <div className="flex flex-row items-center gap-4 w-full">
           <ItemIcon />
             <span className="font-medium">
-    {item.label || t([`${itemName}.t`, `workbench:${itemName}`])}
-  </span>
+            {item.label || t([`${itemName}.t`, `workbench:${itemName}`])}
+          </span>
         </div>
         <div className="font-bold">
           <Value
@@ -232,7 +239,8 @@ export const MenuItemGroup = ({
             design={design}
           />
         </div>
-      </div>,
+      </div>
+      ,
       item.isGroup ? (
         <MenuItemGroup
           key={itemName}

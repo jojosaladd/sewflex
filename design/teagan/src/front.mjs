@@ -267,7 +267,7 @@ export const front = {
     sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", menu: 'fit' },
     lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", menu: 'fit' },
     backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", menu: 'style' },
-    armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", menu: 'fit' },
+    armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", special: "TESTING TESTING", menu: 'fit' },
 
     // Teagan specific
     draftForHighBust: { bool: false},
