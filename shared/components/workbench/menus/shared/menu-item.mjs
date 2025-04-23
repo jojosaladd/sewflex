@@ -140,12 +140,19 @@ export const MenuItem = ({
           className={`text-base font-medium -mt-2 block ${changed ? 'text-accent' : 'opacity-50'}`}
           
         >        
+          <br />
           {config.special && (
-            <span className="block text-sm font-normal opacity-70 leading-tight -mt-1">
+          <div className="text-sm leading-snug mt-1">
+            <div className="font-medium opacity-100">
               {config.special}
-            </span>
+            </div>
+            <div className="mt-1 opacity-70">
+              {config.tip}
+            </div>
+          </div>
           )}
-          
+            <br />
+
           {t(`workbench:youUse${changed ? 'Default' : 'Custom'}Value`)}
         </span>
       }

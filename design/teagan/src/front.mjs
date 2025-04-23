@@ -267,7 +267,7 @@ export const front = {
     sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", menu: 'fit' },
     lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", menu: 'fit' },
     backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", menu: 'style' },
-    armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", special: "TESTING TESTING", menu: 'fit' },
+    armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", special: "Example (Size 6):", tip: "At 4%, the underarm is 0.65” (1.65 cm) higher than the default (12%). At 30%, the underarm is 1.4” (3.56 cm) lower.", menu: 'fit' },
 
     // Teagan specific
     draftForHighBust: { bool: false},
