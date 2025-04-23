@@ -263,10 +263,10 @@ export const front = {
     sleeveWidthGuarantee: 0.85,
     frontArmholeDeeper: 0.005,
     // Brian overrides
-    chestEase: { pct: 12, min: 5, max: 25, label:"Chest Girth", menu: 'fit' },
-    sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", menu: 'fit' },
-    lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", menu: 'fit' },
-    backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", menu: 'style' },
+    chestEase: { pct: 12, min: 5, max: 25, label:"Chest Girth", special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
+    sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
+    lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
+    backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
     armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", special: "Example (Size 6):", tip: "At 4%, the underarm is 0.65” (1.65 cm) higher than the default (12%). At 30%, the underarm is 1.4” (3.56 cm) lower.", menu: 'fit' },
 
     // Teagan specific
@@ -277,12 +277,13 @@ export const front = {
       min: 8,
       max: 40,
       label: "Waist Girth",
+      special: "Example (Size 6):", tip:"At blah", 
       menu: (settings, mergedOptions) => (mergedOptions.fitWaist ? 'fit' : false),
     },
-    hipsEase: { pct: 18, min: 8, max: 30, label:"Hip Girth", menu: 'fit' },
-    necklineDepth: { pct: 25, min: 20, max: 40, label:"Front Neckline Depth", menu: 'style' },
-    necklineWidth: { pct: 30, min: 10, max: 50, label: "Neckline Width", menu: 'style' },
-    necklineBend: { pct: 30, min: 0, max: 70,label:"Front Neckline Shape", menu: 'style' },
+    hipsEase: { pct: 18, min: 8, max: 30, label:"Hip Girth" , special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
+    necklineDepth: { pct: 25, min: 20, max: 40, label:"Front Neckline Depth", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
+    necklineWidth: { pct: 30, min: 10, max: 50, label: "Neckline Width", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
+    necklineBend: { pct: 30, min: 0, max: 70,label:"Front Neckline Shape", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
   },
   draft: teaganFront,
 }

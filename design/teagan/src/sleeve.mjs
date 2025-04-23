@@ -109,7 +109,7 @@ export const sleeve = {
   from: sleevecap,
   hide: hidePresets.HIDE_TREE,
   options: {
-    sleeveEase: { pct: 15, min: 5, max: 35, label: "Sleeve Shape", menu: 'style', extraNote: 'testing' },
+    sleeveEase: { pct: 15, min: 5, max: 35, label: "Sleeve Shape", menu: false },
     /*
      * Hide options from Brian
      */
