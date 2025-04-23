@@ -179,12 +179,12 @@ const useBoolConfig = (name, config) => {
     () => ({
       list: [false, true],
       choiceTitles: {
-        false: `${name}No`,
-        true: `${name}Yes`,
+        false: 'No',
+        true: 'Yes',
       },
       valueTitles: {
-        false: 'no',
-        true: 'yes',
+        false: 'No',
+        true: 'Yes',
       },
       ...config,
     }),
@@ -249,8 +249,9 @@ export const ListInput = ({
       : isDesignOption
       ? `${design}:${name}.${entry}`
       : `${name}.o.${entry}`
-    const title = config.titleMethod ? config.titleMethod(entry, t) : t(`${titleKey}.t`)
-    const desc = config.valueMethod ? config.valueMethod(entry, t) : t(`${titleKey}.d`)
+
+      const title = config.choiceTitles?.[entry] || t(`${titleKey}.t`, entry)
+      const desc = config.valueTitles?.[entry] || t(`${titleKey}.d`, '')
     const sideBySide = config.sideBySide || desc.length + title.length < 42
 
     return (

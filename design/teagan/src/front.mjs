@@ -1,5 +1,6 @@
 import { base } from '@freesewing/brian'
 import { hidePresets } from '@freesewing/core'
+import { toAbs, pctBasedOn } from '@freesewing/core'
 
 function teaganFront({
   utils,
@@ -29,7 +30,7 @@ function teaganFront({
     lowerWidth = (measurements.hips * (1 + options.hipsEase)) / 4
     points.hem.x = lowerWidth
     points.hips.x = lowerWidth
-    points.waist.x = midWidth
+    points.waist.x = midWidth 
 
     // control points should be somewhat evenly spaced around waist
     let cpAbove, cpBelow
@@ -81,12 +82,13 @@ function teaganFront({
     points.armholePitch.x
   )
 
-  // Log info for full length
+  // // Log info for full length
   // store.flag.info({
   //   msg: 'teagan:fullLengthFromHps',
   //   replace: { length: units(points.hps.dy(points.hem)) },
   // })
 
+  
   // Store length of neck opening for finish
   store.set(
     'lengthFrontNeckOpening',
@@ -261,26 +263,26 @@ export const front = {
     sleeveWidthGuarantee: 0.85,
     frontArmholeDeeper: 0.005,
     // Brian overrides
-    chestEase: { pct: 12, min: 5, max: 25, menu: 'fit' },
-    sleeveLength: { pct: 30, min: 20, max: 100, menu: 'fit' },
-    lengthBonus: { pct: 15, min: -20, max: 60, menu: 'style' },
-    backNeckCutout: { pct: 8, min: 4, max: 12, menu: 'fit' },
-    armholeDepth:{ pct: 12, min: 4, max: 30, menu: 'fit' },
+    chestEase: { pct: 12, min: 5, max: 25, label:"Chest Girth", menu: 'fit' },
+    sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", menu: 'fit' },
+    lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", menu: 'fit' },
+    backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", menu: 'style' },
+    armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", menu: 'fit' },
 
     // Teagan specific
     draftForHighBust: { bool: false},
-    fitWaist: { bool: false, menu: 'fit' },
+    fitWaist: { bool: false,      label: "Fitted Waist Design", menu: 'style' },
     waistEase: {
       pct: 25,
       min: 8,
       max: 40,
+      label: "Waist Girth",
       menu: (settings, mergedOptions) => (mergedOptions.fitWaist ? 'fit' : false),
     },
-    hipsEase: { pct: 18, min: 8, max: 30, menu: 'fit' },
-    necklineDepth: { pct: 25, min: 20, max: 40, menu: 'style' },
-    necklineWidth: { pct: 30, min: 10, max: 50, menu: 'style' },
-    necklineBend: { pct: 30, min: 0, max: 70, menu: 'style' },
+    hipsEase: { pct: 18, min: 8, max: 30, label:"Hip Girth", menu: 'fit' },
+    necklineDepth: { pct: 25, min: 20, max: 40, label:"Front Neckline Depth", menu: 'style' },
+    necklineWidth: { pct: 30, min: 10, max: 50, label: "Neckline Width", menu: 'style' },
+    necklineBend: { pct: 30, min: 0, max: 70,label:"Front Neckline Shape", menu: 'style' },
   },
-
   draft: teaganFront,
 }

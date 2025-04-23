@@ -1,5 +1,6 @@
 import { sleevecap } from '@freesewing/brian'
 import { hidePresets } from '@freesewing/core'
+import { pctBasedOn } from '@freesewing/core'
 
 function teaganSleeve({
   sa,
@@ -108,7 +109,7 @@ export const sleeve = {
   from: sleevecap,
   hide: hidePresets.HIDE_TREE,
   options: {
-    sleeveEase: { pct: 15, min: 5, max: 35, menu: 'style' },
+    sleeveEase: { pct: 15, min: 5, max: 35, label: "Sleeve Shape", menu: 'style', extraNote: 'testing' },
     /*
      * Hide options from Brian
      */
