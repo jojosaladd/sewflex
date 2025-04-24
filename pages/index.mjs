@@ -22,18 +22,30 @@ const HomePage = ({ page }) => {
 
   return (
     <PageWrapper {...page} title={false}>
-      <div className="max-w-prose text-center">
-        <h1>SewFlex</h1>
-        <h3>Automated Pattern Adjustment for Home Sewers</h3>
-      </div>
-      <div className="max-w-prose">
-        <p>Hello, I'm Joanna. Thank you for participating in Part 2: Tool Testing/Interview for my master's thesis study, <strong>"Developing an Automated Pattern Adjustment System for Home Sewers"</strong>.</p>
-        <p>We're exploring how to improve fit accuracy for home sewers who don't fit standard pattern sizes. Your participation will help us understand if an automated adjustment tool can make home sewing more accessible and enjoyable.</p>
-        <p>Here, we will add more info later? consent form , steps blah blah</p>
+          <div className="max-w-prose text-center">
+      <h1>SewFlex</h1>
+      <h3>Automated Pattern Adjustment for Home Sewers</h3>
+    </div>
 
-      </div>
-      <p className="text-center text-sm mt-12 opacity-60">SewFlex is adapted from the FreeSewing open-source project (FreeSewing.dev API) and extends its functionality to provide an intuitive and user-friendly solution for automating pattern adjustments for non-standard petite and curvy body sizing. For more information about this API, please visit the <strong><a href="https://freesewing.dev/" target="_blank" rel="noopener noreferrer">FreeSewing.dev</a></strong>.</p>
+          <div className="max-w-prose space-y-4 mt-6">
+      <p>
+        Hello, I'm Joanna. <strong>SewFlex</strong> is a tool developed as part of my research project, <strong>"Developing an Automated Pattern Adjustment System for Home Sewers."</strong>
+      </p>
+      <p>
+        This tool aims to make it easier for home sewers, especially those who don’t fit standard pattern sizes or aren’t necessarily tech-savvy, to adjust and customize patterns to their body measurements and style preferences.
+      </p>
+      <p>
+        With SewFlex, you can create a custom-sized pattern using a detailed size chart, adjust design elements with intuitive controls, or get help from the built-in AI assistant.
+      </p>
+      <p>
+        Click the <strong>Design</strong> tab above to get started!
+      </p>
+    </div>
 
+    <p className="text-center text-sm mt-12 opacity-60">
+  SewFlex is adapted from the FreeSewing open-source project (FreeSewing.dev API) and extends its functionality to provide an intuitive, user-friendly solution for automating pattern adjustments. It’s designed especially for non-standard body types, with support from an AI assistant and a detailed size chart.  
+  For more information about the API, please visit <strong><a href="https://freesewing.dev/" target="_blank" rel="noopener noreferrer">FreeSewing.dev</a></strong>.
+</p>
     </PageWrapper>
   )
 }

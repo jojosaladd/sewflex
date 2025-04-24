@@ -7,9 +7,9 @@ import { square } from './square.mjs'
 
 // Setup our new design
 const Teagan = new Design({
-  parts: [back, front, sleeve, square],
+  parts: [back, front, sleeve],
 })
 
 
 // Named exports
-export { back, front, sleeve, square, Teagan }
+export { back, front, sleeve, Teagan }

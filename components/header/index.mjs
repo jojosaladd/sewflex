@@ -43,7 +43,7 @@ const NavIcons = ({ setModal }) => {
       >
         <RocketIcon className={iconSize} />
       </NavButton>
-      <NavButton href="https://freesewing.dev/" label={t('Instructions')} color={spectrum[3]}>
+      <NavButton href="/instructions" label="Instructions" color={spectrum[3]}>
         <DocsIcon className={iconSize} />
       </NavButton>
       {/*<NavButton

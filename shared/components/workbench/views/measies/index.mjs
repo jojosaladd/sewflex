@@ -99,11 +99,11 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
       // Update state directly so React knows to re-render
       setAdjustedMeasurements((prev) => ({
         ...prev,
-        [key]: parseFloat(convertedValue),
+        [key]: parseFloat(convertedValue).toFixed(2),
       }));
   
       // Also update global settings if needed
-      update.settings(['measurements', key], parseFloat(convertedValue));
+      update.settings(['measurements', key], parseFloat(convertedValue).toFixed(2));
       setIsCustom(true);
     }
     setEditingMeasurement(null);
@@ -131,7 +131,7 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
 
   // Convert measurements based on unit system
   const convertMeasurement = (value) => {
-    return settings.units === 'imperial' ? (value / 25.4).toFixed(2) : value / 10; // Convert mm to inches if imperial
+    return settings.units === 'imperial' ? (value / 25.4).toFixed(2) : (value / 10).toFixed(2); // Convert mm to inches if imperial
   };
 
   // Get the closest smaller and larger size
