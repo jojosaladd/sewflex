@@ -263,10 +263,10 @@ export const front = {
     sleeveWidthGuarantee: 0.85,
     frontArmholeDeeper: 0.005,
     // Brian overrides
-    chestEase: { pct: 12, min: 5, max: 25, label:"Chest Girth", special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
-    sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
-    lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
-    backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
+    chestEase: { pct: 12, min: 5, max: 25, label:"Chest Girth", special: "Example (Size 6):", tip:"At 5%, the chest girth is 0.6” (1.52 cm) smaller than the default (12%). At 25%, it is 1.15” (2.92 cm) larger.", menu: 'fit' },
+    sleeveLength: { pct: 30, min: 20, max: 100, label:"Sleeve Length", special: "Example (Size 6):", tip:"At 20%, the sleeve length is 0.65” (1.65 cm) shorter than the default (30%). At 100%, it is 4.54” (11.53 cm) longer.", menu: 'fit' },
+    lengthBonus: { pct: 15, min: -20, max: 100, label:"Length", special: "Example (Size 6):", tip:"At 20%, the dress length is 6.74” (17.12 cm) shorter than the default (21.624” at 18%). At 60%, it is 8.66” (22.00 cm) longer (full length: 30”). At 100%, it is 16.38” (41.60 cm) longer, reaching a full length of 38” (HPS to hem).", menu: 'fit' },
+    backNeckCutout: { pct: 8, min: 4, max: 12, label:"Back Neck Depth", special: "Example (Size 6):", tip:"At 4%, the neckline is 0.57” (1.45 cm) higher than the default (8%). At 12%, it is 0.57” (1.45 cm) lower (deeper).", menu: 'style' },
     armholeDepth:{ pct: 12, min: 4, max: 30, label: "Armhole Depth", special: "Example (Size 6):", tip: "At 4%, the underarm is 0.65” (1.65 cm) higher than the default (12%). At 30%, the underarm is 1.4” (3.56 cm) lower.", menu: 'fit' },
 
     // Teagan specific
@@ -280,10 +280,10 @@ export const front = {
       special: "Example (Size 6):", tip:"At blah", 
       menu: (settings, mergedOptions) => (mergedOptions.fitWaist ? 'fit' : false),
     },
-    hipsEase: { pct: 18, min: 8, max: 30, label:"Hip Girth" , special: "Example (Size 6):", tip:"At blah", menu: 'fit' },
-    necklineDepth: { pct: 25, min: 20, max: 40, label:"Front Neckline Depth", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
-    necklineWidth: { pct: 30, min: 10, max: 50, label: "Neckline Width", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
-    necklineBend: { pct: 30, min: 0, max: 70,label:"Front Neckline Shape", special: "Example (Size 6):", tip:"At blah", menu: 'style' },
+    hipsEase: { pct: 18, min: 8, max: 30, label:"Hip Girth" , special: "Example (Size 6):", tip:"At 8%, the hip girth is 0.75” (1.91 cm) smaller than the default (18%). At 30%, it is 1” (2.54 cm) larger. ", menu: 'fit' },
+    necklineDepth: { pct: 25, min: 20, max: 40, label:"Front Neckline Depth", special: "Example (Size 6):", tip:"At 20%, the neckline is 0.78” (1.98 cm) higher than the default (25%). At 40%, it is 2.36” (5.99 cm) lower (deeper).", menu: 'style' },
+    necklineWidth: { pct: 30, min: 10, max: 50, label: "Neckline Width", special: "Example (Size 6):", tip:"At 10%, the neckline is 1” (2.54 cm) narrower than the default (30%). At 50%, it is 1” (2.54 cm) wider.", menu: 'style' },
+    necklineBend: { pct: 30, min: 0, max: 70,label:"Front Neckline Shape", special: "Example (Size 6):", tip:"Closer to 0% = more of a straight V-line shape. Closer to 70% = more curved.", menu: 'style' },
   },
   draft: teaganFront,
 }
