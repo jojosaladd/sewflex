@@ -42,10 +42,10 @@ const HomePage = ({ page }) => {
       </p>
     </div>
 
-    <p className="text-center text-sm mt-12 opacity-60">
+    {/* <p className="text-center text-sm mt-12 opacity-60">
   SewFlex is adapted from the FreeSewing open-source project (FreeSewing.dev API) and extends its functionality to provide an intuitive, user-friendly solution for automating pattern adjustments. It’s designed especially for non-standard body types, with support from an AI assistant and a detailed size chart.  
   For more information about the API, please visit <strong><a href="https://freesewing.dev/" target="_blank" rel="noopener noreferrer">FreeSewing.dev</a></strong>.
-</p>
+</p> */}
     </PageWrapper>
   )
 }
