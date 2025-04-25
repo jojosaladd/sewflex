@@ -78,9 +78,10 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   };
 
   const revertMeasurement = (value) => {
-    return settings.units === 'imperial' ? value * 25.4 : value * 10;
+    const num = parseFloat(value);
+    if (isNaN(num)) return 0; // fallback
+    return settings.units === 'imperial' ? num * 25.4 : num * 10;
   };
-  
   const handleDoubleClick = (key, value) => {
     if (!isEditMode) return;
     setEditingMeasurement(key);
@@ -93,22 +94,27 @@ export const MeasiesView = ({ update, setView, Design, settings }) => {
   };
 
   const handleBlur = (key) => {
-    if (editedValue.trim() !== "" && !isNaN(editedValue)) {
-      const convertedValue = revertMeasurement(editedValue);
+    const trimmed = editedValue.trim();
+    const parsed = parseFloat(trimmed);
   
-      // Update state directly so React knows to re-render
-      setAdjustedMeasurements((prev) => ({
-        ...prev,
-        [key]: parseFloat(convertedValue).toFixed(2),
-      }));
-  
-      // Also update global settings if needed
-      update.settings(['measurements', key], parseFloat(convertedValue).toFixed(2));
-      setIsCustom(true);
+    if (trimmed === "" || isNaN(parsed)) {
+      console.warn(`Invalid input for ${key}: "${trimmed}"`);
+      setEditingMeasurement(null);
+      return;
     }
+  
+    const convertedValue = revertMeasurement(parsed);
+    const finalValue = parseFloat(convertedValue).toFixed(2);
+  
+    setAdjustedMeasurements((prev) => ({
+      ...prev,
+      [key]: Number(finalValue),
+    }));
+  
+    update.settings(['measurements', key], Number(finalValue));
+    setIsCustom(true);
     setEditingMeasurement(null);
   };
-  
   
   const handleKeyDown = (e, key) => {
     if (e.key === "Enter") {

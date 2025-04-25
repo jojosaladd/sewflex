@@ -12,16 +12,28 @@ const InstructionsPage = ({ page }) => {
 
   return (
     <PageWrapper {...page} title={false}>
-      <div className="max-w-prose text-center">
-        <h3>Instructions & Getting Started</h3>
-      </div>
+    <div className="max-w-prose text-center">
+      <h3>Instructions & Getting Started</h3>
+    </div>
 
-      <div className="max-w-prose space-y-4 mt-6">
-        <p>
-          Welcome to SewFlex! This page is currently under development, but feel free to look around!
-        </p>
+    <div className="max-w-prose space-y-4 mt-6">
+      <p>
+        Welcome to SewFlex! Watch the instructions video below to get started. 
+        If anything is unclear, feel free to reach out to our team for help.
+      </p>
+      <div className="aspect-video">
+        <iframe
+          className="w-full h-full"
+          src="https://www.youtube.com/embed/iz9BNS2g4_4?si=alo4mfYnx6qGAL1_"
+          title="SewFlex Instructions Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
       </div>
-    </PageWrapper>
+    </div>
+  </PageWrapper>
   )
 }
 
